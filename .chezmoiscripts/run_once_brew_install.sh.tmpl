@@ -1,8 +1,15 @@
 #!/bin/bash
 
-brew --version > /dev/null
+brew --version >/dev/null
 brew_found=$?
-if (($brew_found)); then echo "Homebrew not found."; exit 1; fi
+if (($brew_found)); then
+    cat <<EOF
+### Homebrew not found, run the following install command. ###
+### It will ask ask for sudo (see https://brew.sh/) ###
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+EOF
+    exit 1
+fi
 
 # update
 brew update --quiet
@@ -11,14 +18,13 @@ brew install --quiet chezmoi zsh powerlevel10k nnn neovim antidote
 # environments
 brew install --quiet pyenv
 
-
-cat << EOF
+cat <<EOF
 ###################################################
     Run the following so pyenv can build python 
 ###################################################
 EOF
 {{ if eq .chezmoi.os "linux" }}
-cat << EOF
+cat <<EOF
 sudo apt update
 # build-essential
 sudo apt install build-essential
@@ -28,7 +34,7 @@ libbz2-dev libreadline-dev libsqlite3-dev curl \
 libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev llvm
 EOF
 {{ else if eq .chezmoi.os "darwin"}}
-cat << EOF
+cat <<EOF
 # Xcode CLI tools
 xcode-select --install
 # python dependencies
