@@ -9,6 +9,9 @@ fi
 source ${HOMEBREW_PREFIX}/opt/antidote/share/antidote/antidote.zsh
 antidote load
 
+# default editor
+export EDITOR=nvim
+
 # zsh completion
 autoload -U compinit && compinit
 
