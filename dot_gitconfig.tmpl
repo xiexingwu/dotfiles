@@ -2,6 +2,6 @@
 [user]
 	name = Michael Xie
 	email = xie.michael.x@gmail.com
-{{ if eq .chezmoi.os "linux" "darwin" }}
 [core]
-	excludesfile = $HOME/.gitignore
+	excludesfile = {{.chezmoi.homeDir}}/.gitignore
+	
