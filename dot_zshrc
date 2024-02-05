@@ -9,5 +9,11 @@ fi
 source ${HOMEBREW_PREFIX}/opt/antidote/share/antidote/antidote.zsh
 antidote load
 
+# zsh completion
+autoload -U compinit && compinit
+
+# disable # for pattern matching
+disable -p '#'
+
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
