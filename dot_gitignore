@@ -1,0 +1,12 @@
+# MacOS
+.DS_Store
+
+# Windows
+Thumbs.db
+
+# npm
+node_modules/
+
+# logs
+logs/
+log/

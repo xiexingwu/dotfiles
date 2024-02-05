@@ -1,0 +1,9 @@
+# This is Git's per-user configuration file.
+{{ $name := promptString "git user.name" }}
+{{ $email := promptString "git user.email" }}
+[user]
+	name = {{ $name }}
+	email = {{ $email }}
+{{ if eq .chezmoi.os "linux" "darwin" }}
+[core]
+	excludesfile = $HOME/.gitignore
