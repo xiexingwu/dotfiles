@@ -12,12 +12,25 @@ EOF
 fi
 
 # update
+HOMEBREW_NO_AUTO_UPDATE="1"
 brew update --quiet
+
 # terminal tools
-brew install --quiet chezmoi zsh powerlevel10k nnn neovim antidote
+brew install --quiet chezmoi
+brew install --quiet zsh antidote powerlevel10k nnn neovim
+brew install --quiet rename ripgrep saulpw/vd/visidata
+
+# fonts
+brew tap --quiet homebrew/cask-fonts
+brew install --quiet --cask font-meslo-lg-nerd-font
+
 # environments
 brew install --quiet pyenv
 
+# apps
+brew install --quiet --cask kitty
+
+# python deps
 cat <<EOF
 ###################################################
     Run the following so pyenv can build python 
