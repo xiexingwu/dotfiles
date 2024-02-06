@@ -1,3 +1,4 @@
+ZDIR="$HOME/.zdir"
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -12,11 +13,22 @@ antidote load
 # default editor
 export EDITOR=nvim
 
-# zsh completion
-autoload -U compinit && compinit
+# kitty - https://sw.kovidgoyal.net/kitty/conf/#shortcut-kitty.Reset-the-terminal
+ctrl_l() {
+    builtin print -rn -- $'\r\e[0J\e[H\e[22J' >"$TTY"
+    builtin zle .reset-prompt
+    builtin zle -R
+}
+zle -N ctrl_l
+bindkey '^l' ctrl_l
 
-# disable # for pattern matching
-disable -p '#'
+# Don't let "/" split words
+export WORDCHARS=${WORDCHARS/\/}
+
+# zsh
+disable -p '#' # disable # for pattern matching
+source $ZDIR/oh-my-zsh.sh
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+

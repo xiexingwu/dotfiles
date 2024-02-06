@@ -5,6 +5,7 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 {{ else if eq .chezmoi.os "linus" }}
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 {{ end }}
+
 eval "$(pyenv init --path)"
 
 # brew auto-completion
