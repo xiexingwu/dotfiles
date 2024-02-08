@@ -10,6 +10,8 @@ local options = {
 		html = { "prettier" },
 
 		sh = { "shfmt" },
+    sql = {"sqlfluff"},
+    python = { "black" },
 	},
 
   -- adding same formatter for multiple filetypes can look too much work for some
