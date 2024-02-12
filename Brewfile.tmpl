@@ -1,0 +1,36 @@
+# terminal tools
+# brew chezmoi
+brew antidote 
+brew fzf
+brew jq
+brew neovim
+brew nnn 
+brew powerlevel10k 
+brew rename 
+brew ripgrep 
+brew saulpw/vd/visidata
+brew zsh 
+
+{{ if eq .chezmoi.os "darwin" -}}
+# macos
+tap koekeishiya/formulae
+brew skhdz
+brew yabai
+{{ end -}}
+
+# formatters
+brew black 
+brew prettier 
+brew shfmt 
+brew sqlfluff
+brew stylua 
+
+# fonts
+tap homebrew/cask-fonts
+brew font-meslo-lg-nerd-font
+
+# apps
+brew kitty
+
+# environment manager
+brew pyenv

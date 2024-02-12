@@ -14,24 +14,7 @@ fi
 # update
 HOMEBREW_NO_AUTO_UPDATE="1"
 brew update --quiet
-
-# terminal tools
-brew install --quiet chezmoi
-brew install --quiet zsh antidote powerlevel10k nnn neovim
-brew install --quiet rename ripgrep saulpw/vd/visidata
-
-# formatters
-brew install --quiet stylua black prettier shfmt sqlfluff
-
-# fonts
-brew tap --quiet homebrew/cask-fonts
-brew install --quiet --cask font-meslo-lg-nerd-font
-
-# environments
-brew install --quiet pyenv
-
-# apps
-brew install --quiet --cask kitty
+brew bundle
 
 # python deps
 cat <<EOF
@@ -39,7 +22,8 @@ cat <<EOF
     Run the following so pyenv can build python 
 ###################################################
 EOF
-{{ if eq .chezmoi.os "linux" }}
+
+{{ if eq .chezmoi.os "linux" -}}
 cat <<EOF
 sudo apt update
 # build-essential
@@ -49,12 +33,17 @@ sudo apt install libssl-dev zlib1g-dev \
 libbz2-dev libreadline-dev libsqlite3-dev curl \
 libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev llvm
 EOF
-{{ else if eq .chezmoi.os "darwin"}}
+
+{{ else if eq .chezmoi.os "darwin" -}}
+
 cat <<EOF
 # Xcode CLI tools
 xcode-select --install
 # python dependencies
 brew install --quiet openssl readline sqlite3 xz zlib tcl-tk
 EOF
-{{ end }}
-echo '###################################################'
+{{ end -}}
+
+cat << EOF
+###################################################
+EOF
