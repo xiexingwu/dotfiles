@@ -1,0 +1,10 @@
+return {
+    "luukvbaal/nnn.nvim",
+    config = function()
+        require("nnn").setup()
+        -- vim.keymap.set('n', '<leader>e', "<cmd>NnnExplorer %:p:h<CR>", {})
+        -- vim.keymap.set('t', '<leader>e', "<cmd>NnnExplorer<CR>", {})
+        vim.keymap.set('n', '<leader>e', "<cmd>NnnPicker<CR>", {})
+        vim.keymap.set('t', '<leader>e', "<cmd>NnnPicker<CR>", {})
+    end
+}
