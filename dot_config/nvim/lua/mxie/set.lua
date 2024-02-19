@@ -1,4 +1,3 @@
-
 vim.opt.nu = true
 vim.opt.relativenumber = true
 
@@ -16,6 +15,7 @@ vim.opt.backup = false
 vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
 vim.opt.undofile = true
 
+vim.opt.ignorecase = true
 vim.opt.hlsearch = true
 vim.opt.incsearch = true
 
@@ -27,5 +27,11 @@ vim.opt.isfname:append("@-@")
 
 vim.opt.updatetime = 50
 
-vim.opt.colorcolumn = "80"
+-- vim.opt.colorcolumn = "80"
+vim.opt.cursorline = true
 
+vim.api.nvim_create_autocmd("FileType", {
+	desc = "set line numbers for kitty-scrollback",
+	pattern = "kitty-scrollback",
+	command = "set nu relativenumber",
+})

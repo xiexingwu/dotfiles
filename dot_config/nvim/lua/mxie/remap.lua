@@ -22,9 +22,12 @@ vim.keymap.set("n", "<leader>y", [[mzV"+yzz]])
 -- misc
 vim.keymap.set("i", "<C-c>", "<Esc>")
 vim.keymap.set("n", "Q", "<nop>")
+vim.keymap.set("n", "q:", "<nop>") -- use :<C-f> instead
 
 vim.keymap.set("n", "<leader>FML", "<cmd>CellularAutomaton make_it_rain<CR>")
 vim.keymap.set("n", "<A-w>", "<cmd>bd<CR>", { desc = "Close buffer" })
+
+vim.keymap.set("n", "<leader>l", "<cmd>noh<CR>", { desc = "Clear highlights" })
 
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
 --[[ vim.keymap.set('n', '<space>e', vim.diagnostic.open_float)

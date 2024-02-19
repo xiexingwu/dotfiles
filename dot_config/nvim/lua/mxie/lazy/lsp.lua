@@ -33,12 +33,35 @@ return {
 			local cmp_action = lsp_zero.cmp_action()
 
 			cmp.setup({
+				sources = {
+					{ name = "nvim_lsp" },
+				},
+				mapping = {
+					["<C-y>"] = cmp.mapping.confirm({ select = false }),
+					["<C-e>"] = cmp.mapping.abort(),
+					-- ["<Up>"] = cmp.mapping.select_prev_item({ behavior = "select" }),
+					-- ["<Down>"] = cmp.mapping.select_next_item({ behavior = "select" }),
+					["<C-p>"] = cmp.mapping(function()
+						if cmp.visible() then
+							cmp.select_prev_item({ behavior = "select" })
+						else
+							cmp.complete()
+						end
+					end),
+					["<C-n>"] = cmp.mapping(function()
+						if cmp.visible() then
+							cmp.select_next_item({ behavior = "select" })
+						else
+							cmp.complete()
+						end
+					end),
+				},
+				snippet = {
+					expand = function(args)
+						require("luasnip").lsp_expand(args.body)
+					end,
+				},
 				formatting = lsp_zero.cmp_format(),
-				mapping = cmp.mapping.preset.insert({
-					["<C-Space>"] = cmp.mapping.complete(),
-					["<C-f>"] = cmp_action.luasnip_jump_forward(),
-					["<C-b>"] = cmp_action.luasnip_jump_backward(),
-				}),
 			})
 		end,
 	},
@@ -53,7 +76,6 @@ return {
 			{ "williamboman/mason-lspconfig.nvim" },
 		},
 		config = function()
-			-- This is where all the LSP shenanigans will live
 			local lsp_zero = require("lsp-zero")
 			lsp_zero.extend_lspconfig()
 
@@ -62,7 +84,7 @@ return {
 			lsp_zero.on_attach(function(client, bufnr)
 				-- see :help lsp-zero-keybindings
 				-- to learn the available actions
-				lsp_zero.default_keymaps({ buffer = bufnr })
+				lsp_zero.default_keymaps({ buffer = bufnr, preserve_mappings = false })
 			end)
 
 			require("mason-lspconfig").setup({
@@ -70,12 +92,14 @@ return {
 				handlers = {
 					lsp_zero.default_setup,
 					lua_ls = function()
-						-- (Optional) Configure lua language server for neovim
 						local lua_opts = lsp_zero.nvim_lua_ls()
 						require("lspconfig").lua_ls.setup(lua_opts)
 					end,
 				},
 			})
+
+			-- Swift sourcekit-lsp
+			require("lspconfig").sourcekit.setup({})
 
 			-- Use LspAttach autocommand to only map the following keys
 			-- after the language server attaches to the current buffer
@@ -85,12 +109,11 @@ return {
 					-- Enable completion triggered by <c-x><c-o>
 					vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
 
-					-- Buffer local mappings.
-					-- See `:help vim.lsp.*` for documentation on any of the below functions
+					-- Buffer local mappings -- commented since lsp-zero should define them
 					local opts = { buffer = ev.buf }
-					vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
-                    vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
 					vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+					vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
+					vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
 					vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
 					vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, opts)
 					vim.keymap.set("n", "<space>wa", vim.lsp.buf.add_workspace_folder, opts)

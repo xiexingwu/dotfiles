@@ -5,6 +5,8 @@ return {
 		"nvim-tree/nvim-web-devicons",
 		"nvim-treesitter/nvim-treesitter-context",
 	},
+    event = "VeryLazy",
+    lazy = true,
 	config = function()
 		require("nvim-treesitter.configs").setup({
 			-- A list of parser names, or "all"
@@ -67,7 +69,7 @@ return {
 		local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
 		parser_config.jinja = {
 			install_info = {
-				url = "dbt-labs/tree-sitter-jinja2", -- local path or git repo
+				url = "https://github.com/dbt-labs/tree-sitter-jinja2", -- local path or git repo
 				files = { "src/parser.c" }, -- note that some parsers also require src/scanner.c or src/scanner.cc
 				-- optional entries:
 				branch = "main", -- default branch in case of git repo if different from master
