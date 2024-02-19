@@ -1,4 +1,7 @@
-ZDIR="$HOME/.zdir"
+ZDIR=$HOME/.zdir
+DATDIR=$HOME/.local/share
+YABDIR=$DATDIR/yabai
+
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -8,10 +11,7 @@ fi
 
 # antidote
 source ${HOMEBREW_PREFIX}/opt/antidote/share/antidote/antidote.zsh
-antidote load
-
-# default editor
-export EDITOR=nvim
+antidote load ${ZDIR}/.zsh_plugins.txt
 
 # kitty - https://sw.kovidgoyal.net/kitty/conf/#shortcut-kitty.Reset-the-terminal
 ctrl_l() {
@@ -22,12 +22,14 @@ ctrl_l() {
 zle -N ctrl_l
 bindkey '^l' ctrl_l
 
-# Don't let "/" split words
-export WORDCHARS=${WORDCHARS/\/}
-
 # zsh
 disable -p '#' # disable # for pattern matching
 source $ZDIR/oh-my-zsh.sh
+
+source /opt/homebrew/etc/profile.d/z.sh
+
+# brew autocomplete for zsh
+FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

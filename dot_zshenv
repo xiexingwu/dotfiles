@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# default editor 
+alias vim=nvim
+export EDITOR=nvim
+
+
+# rg for homedir, make .ignore recursive, while searching in recognised dirs
+# alias rg_home="rg --files $(sed -n 's:^\(.*\)/$:-g \"!**/\1/**\":p' $HOME/.ignore | tr '\n' ' ') src .zdir .config"
+
+eval "$(/opt/homebrew/bin/brew shellenv)"
+eval "$(pyenv init --path)"
+
+export PATH=$HOME/.local/bin:$PATH
+
+# Don't let "/" split words
+export WORDCHARS=${WORDCHARS/\/}
