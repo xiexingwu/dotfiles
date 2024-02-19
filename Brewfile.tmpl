@@ -9,13 +9,15 @@ brew powerlevel10k
 brew rename 
 brew ripgrep 
 brew saulpw/vd/visidata
+brew sqlite
+brew z
 brew zsh 
 
 {{ if eq .chezmoi.os "darwin" -}}
 # macos
-tap koekeishiya/formulae
-brew skhdz
-brew yabai
+brew FelixKratz/formulae/borders
+cask aerospace, args: { no_quarantine: true }
+cask xcodes
 {{ end -}}
 
 # formatters
