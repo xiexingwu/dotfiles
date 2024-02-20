@@ -27,6 +27,9 @@ gaps.outer = { top = 6, bottom = 6, left = 6, right = 6 }
 if.app-name-regex-substring = '^(slack|wechat|discord|messages)$'
 run = ['layout floating', 'move-node-to-workspace chat']
 [[on-window-detected]]
+if.app-name-regex-substring = '^(notes)$'
+run = 'layout floating'
+[[on-window-detected]]
 if.window-title-regex-substring = '-scratch'
 run = ['layout floating']
 
