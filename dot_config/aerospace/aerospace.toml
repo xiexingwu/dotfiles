@@ -108,8 +108,8 @@ t = ['layout tiles horizontal vertical', 'mode main']
 a = ['layout accordion horizontal vertical', 'mode main']
 # focus workspaces 
 c = ['workspace chat', 'mode main']
-p = ['workspace personal', 'workspace personal2', 'mode main']
-w = ['workspace work', 'workspace work2', 'mode main']
+p = ['workspace personal2', 'workspace personal', 'mode main']
+w = ['workspace work2', 'workspace work', 'mode main']
 # reset layout
 shift-r = ['flatten-workspace-tree', 'mode main']
 
