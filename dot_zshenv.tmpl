@@ -8,7 +8,11 @@ export EDITOR=nvim
 # rg for homedir, make .ignore recursive, while searching in recognised dirs
 # alias rg_home="rg --files $(sed -n 's:^\(.*\)/$:-g \"!**/\1/**\":p' $HOME/.ignore | tr '\n' ' ') src .zdir .config"
 
+{{ if eq .chezmoi.os "darwin" -}}
 eval "$(/opt/homebrew/bin/brew shellenv)"
+{{ else if eq .chezmoi.os "linux" -}}
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+{{ end }}
 eval "$(pyenv init --path)"
 
 export PATH=$HOME/.local/bin:$PATH
