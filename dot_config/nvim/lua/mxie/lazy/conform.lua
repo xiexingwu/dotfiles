@@ -25,7 +25,10 @@ return {
 				lua = { "stylua" },
 				python = { { "black", "flake8" } },
 				javascript = { "prettier" },
+				typescript = { "prettier" },
+				typescriptreact = { "prettier" },
 				sql = { "sqlfluff" },
+                templ = { "templ" }
 			},
 		})
 	end,

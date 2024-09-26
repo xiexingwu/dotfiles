@@ -27,10 +27,10 @@ gaps.outer = { top = 6, bottom = 6, left = 6, right = 6 }
 if.app-name-regex-substring = '^(slack|wechat|discord|messages)$'
 run = ['layout floating', 'move-node-to-workspace chat']
 [[on-window-detected]]
-if.app-name-regex-substring = '^(notes)$'
+if.app-name-regex-substring = '^(notes|1password|finder)$'
 run = 'layout floating'
 [[on-window-detected]]
-if.window-title-regex-substring = '-scratch'
+if.window-title-regex-substring = 'scratch'
 run = ['layout floating']
 
 # forced workspace assignment
@@ -44,7 +44,8 @@ work2 = [3, 'secondary']
 # main bindings
 [mode.main.binding]
 # scratch terminal
-cmd-f2 = 'exec-and-forget /opt/homebrew/bin/kitty --title=Kitty-scratch -d $HOME -o macos_quit_when_last_window_closed=yes zsh -i'
+cmd-f2 = 'exec-and-forget /opt/homebrew/bin/kitty --title=Kitty-scratch -d $HOME -o macos_quit_when_last_window_closed=yes zsh -l'
+# cmd-f2 = 'exec-and-forget /opt/homebrew/bin/wezterm --title=Wez-scratch -d $HOME -o macos_quit_when_last_window_closed=yes zsh -i'
 
 
 ## Windows/nodes (alt[-modifier]-hjkl)
@@ -60,8 +61,11 @@ alt-shift-j = 'move down'
 alt-shift-k = 'move up'
 alt-shift-l = 'move right'
 # follow across workspaces
-alt-ctrl-shift-h = ['move-node-to-workspace prev --wrap-around', 'workspace next --wrap-around']
-alt-ctrl-shift-l = ['move-node-to-workspace next --wrap-around', 'workspace next --wrap-around']
+alt-ctrl-shift-comma = ['move-node-to-workspace prev --wrap-around', 'workspace prev --wrap-around']
+alt-ctrl-shift-period = ['move-node-to-workspace next --wrap-around', 'workspace next --wrap-around']
+# follow across monitors
+alt-ctrl-shift-h = ['move-node-to-monitor prev --wrap-around', 'focus-monitor prev --wrap-around']
+alt-ctrl-shift-l = ['move-node-to-monitor next --wrap-around', 'focus-monitor next --wrap-around']
 
 
 ## Workspaces (ctrl-alt[-modifier]-,.)
@@ -69,13 +73,12 @@ ctrl-alt-semicolon = 'mode workspace'
 # swap/move
 ctrl-alt-comma = 'workspace --wrap-around prev'
 ctrl-alt-period = 'workspace --wrap-around next'
-ctrl-alt-shift-comma = 'move-workspace-to-monitor --wrap-around prev'
-ctrl-alt-shift-period = 'move-workspace-to-monitor --wrap-around next'
+# ctrl-alt-shift-comma = 'move-workspace-to-monitor --wrap-around prev'
+# ctrl-alt-shift-period = 'move-workspace-to-monitor --wrap-around next'
 
 
 ## Misc Modes
 cmd-semicolon = 'mode service'
-
 
 [mode.node.binding]
 esc = 'mode main'

@@ -1,5 +1,5 @@
 return {
-	"eandrju/cellular-automaton.nvim",
-	lazy = true,
+    "eandrju/cellular-automaton.nvim",
+    lazy = true,
     event = "UIEnter",
 }
