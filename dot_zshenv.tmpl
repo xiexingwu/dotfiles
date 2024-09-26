@@ -9,13 +9,23 @@ export EDITOR=nvim
 # alias rg_home="rg --files $(sed -n 's:^\(.*\)/$:-g \"!**/\1/**\":p' $HOME/.ignore | tr '\n' ' ') src .zdir .config"
 
 {{ if eq .chezmoi.os "darwin" -}}
-eval "$(/opt/homebrew/bin/brew shellenv)"
+eval "$(/opt/homebrew/bin/brew shellenv)" # not working for scratch kitty window... why?
+export PATH=$HOME/.local/bin:$PATH
+
+# For unicode libs
+export PATH=/opt/homebrew/opt/icu4c/bin:$PATH
+export PATH=/opt/homebrew/opt/icu4c/sbin:$PATH
+export PKG_CONFIG_PATH=/opt/homebrew/opt/icu4c/lib/pkgconfig
 {{ else if eq .chezmoi.os "linux" -}}
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 {{ end }}
+
 eval "$(pyenv init --path)"
 
 export PATH=$HOME/.local/bin:$PATH
 
 # Don't let "/" split words
 export WORDCHARS=${WORDCHARS/\/}
+
+export PYTHONSTARTUP=$HOME/.pythonrc.py
+
