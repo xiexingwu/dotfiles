@@ -1,25 +1,24 @@
 # terminal tools
 # brew "chezmoi"
 brew "antidote" 
+brew "eza"
 brew "fzf"
+brew "iamgemagick"
+brew "jless"
 brew "jq"
 brew "neovim"
-brew "nnn" 
-brew "parallel"
-brew "powerlevel10k" 
 brew "rename" 
 brew "ripgrep" 
-brew "saulpw"/vd/visidata
+brew "saulpw/vd/visidata"
 brew "sqlite"
 brew "z"
 brew "zsh" 
 
-{{ if eq .chezmoi.os "darwin" -}}
 # macos
 brew "FelixKratz/formulae/borders"
 cask "aerospace", args: { no_quarantine: true }
 cask "xcodes"
-{{ end -}}
+cask "wezterm"
 
 # formatters
 brew "black" 
@@ -32,8 +31,14 @@ brew "stylua"
 tap "homebrew/cask-fonts"
 brew "font-meslo-lg-nerd-font"
 
-# apps
-brew "kitty"
+# non-native apps
+cask "dropbox"
+cask "obsidian"
+cask "linearmouse"
+cask "rar"
+cask "vlc"
+cask "wechat"
 
 # environment manager
+brew "nvm"
 brew "pyenv"
