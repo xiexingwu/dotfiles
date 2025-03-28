@@ -8,7 +8,6 @@
 
 # All possible modifiers: cmd, alt, ctrl, shift
 
-
 start-at-login = true
 after-login-command = [] # on user login
 after-startup-command = [ # on aerospace startup
@@ -27,15 +26,20 @@ gaps.outer = { top = 6, bottom = 6, left = 6, right = 6 }
 if.app-name-regex-substring = '^(slack|wechat|discord|messages)$'
 run = ['layout floating', 'move-node-to-workspace chat']
 [[on-window-detected]]
-if.app-name-regex-substring = '^(notes|1password|finder)$'
+if.app-name-regex-substring = '^(notes|1password|finder|youtube music|karabiner-elements|bazecor)$'
 run = 'layout floating'
 [[on-window-detected]]
-if.window-title-regex-substring = 'scratch'
-run = ['layout floating']
+if.app-id="com.mitchellh.ghostty"
+if.window-title-regex-substring = '^scratch$'
+run = 'layout floating'
+[[on-window-detected]]
+if.app-id="com.mitchellh.ghostty"
+run= "layout floating"
+
 
 # forced workspace assignment
 [workspace-to-monitor-force-assignment]
-chat = ['^built-in retina display$', 'secondary']
+chat = ['secondary', '^built-in retina display$']
 personal = ['main', 2]
 personal2 = [3, 'secondary']
 work = ['main', 2]
@@ -43,39 +47,42 @@ work2 = [3, 'secondary']
 
 # main bindings
 [mode.main.binding]
-# scratch terminal
-cmd-f2 = 'exec-and-forget /opt/homebrew/bin/kitty --title=Kitty-scratch -d $HOME -o macos_quit_when_last_window_closed=yes zsh -l'
+alt-semicolon = 'mode node'
+ctrl-alt-semicolon = 'mode workspace'
+## Over-ride system hide
+# cmd-h = []
+# cmd-alt-h = []
+
+## scratch terminal
+# cmd-f2 = 'exec-and-forget /opt/homebrew/bin/kitty --title=Kitty-scratch -d $HOME -o macos_quit_when_last_window_closed=yes zsh -l'
 # cmd-f2 = 'exec-and-forget /opt/homebrew/bin/wezterm --title=Wez-scratch -d $HOME -o macos_quit_when_last_window_closed=yes zsh -i'
 
+## focus
+### Window
+alt-h = 'focus left --ignore-floating --boundaries all-monitors-outer-frame --boundaries-action stop'
+alt-j = 'focus down --ignore-floating --boundaries all-monitors-outer-frame --boundaries-action stop'
+alt-k = 'focus up --ignore-floating --boundaries all-monitors-outer-frame --boundaries-action stop'
+alt-l = 'focus right --ignore-floating --boundaries all-monitors-outer-frame --boundaries-action stop'
+alt-f = 'layout floating tiling' # toggle floating
+alt-enter = 'fullscreen'
+### Workspace
+ctrl-alt-h = 'workspace --wrap-around prev'
+ctrl-alt-l = 'workspace --wrap-around next'
 
-## Windows/nodes (alt[-modifier]-hjkl)
-alt-semicolon = 'mode node'
-# focus
-alt-h = 'focus left --boundaries all-monitors-outer-frame --boundaries-action stop'
-alt-j = 'focus down --boundaries all-monitors-outer-frame --boundaries-action stop'
-alt-k = 'focus up --boundaries all-monitors-outer-frame --boundaries-action stop'
-alt-l = 'focus right --boundaries all-monitors-outer-frame --boundaries-action stop'
-# move within workspace
+## Move
+### Window
 alt-shift-h = 'move left'
 alt-shift-j = 'move down'
 alt-shift-k = 'move up'
 alt-shift-l = 'move right'
-# follow across workspaces
-alt-ctrl-shift-comma = ['move-node-to-workspace prev --wrap-around', 'workspace prev --wrap-around']
-alt-ctrl-shift-period = ['move-node-to-workspace next --wrap-around', 'workspace next --wrap-around']
-# follow across monitors
-alt-ctrl-shift-h = ['move-node-to-monitor prev --wrap-around', 'focus-monitor prev --wrap-around']
-alt-ctrl-shift-l = ['move-node-to-monitor next --wrap-around', 'focus-monitor next --wrap-around']
-
-
-## Workspaces (ctrl-alt[-modifier]-,.)
-ctrl-alt-semicolon = 'mode workspace'
-# swap/move
-ctrl-alt-comma = 'workspace --wrap-around prev'
-ctrl-alt-period = 'workspace --wrap-around next'
-# ctrl-alt-shift-comma = 'move-workspace-to-monitor --wrap-around prev'
-# ctrl-alt-shift-period = 'move-workspace-to-monitor --wrap-around next'
-
+### Window to monitor
+ctrl-alt-left = ['move-node-to-monitor prev --wrap-around', 'focus-monitor prev --wrap-around']
+ctrl-alt-right = ['move-node-to-monitor next --wrap-around', 'focus-monitor next --wrap-around']
+### Window to next workspace (follow)
+ctrl-alt-shift-h = ['move-node-to-workspace prev --wrap-around --focus-follows-window']
+ctrl-alt-shift-l = ['move-node-to-workspace next --wrap-around --focus-follows-window']
+### toggle workspace layout
+ctrl-alt-enter = 'layout tiles accordion horizontal'
 
 ## Misc Modes
 cmd-semicolon = 'mode service'
@@ -83,40 +90,42 @@ cmd-semicolon = 'mode service'
 [mode.node.binding]
 esc = 'mode main'
 f = ['layout floating tiling', 'mode main'] # Toggle floating and unfloat
-enter = ['fullscreen', 'mode main']
-# dump to workspace
+### dump to workspace
 c = ['move-node-to-workspace chat', 'mode main']
 p = ['move-node-to-workspace personal', 'mode main']
 w = ['move-node-to-workspace work', 'mode main']
-shift-p = ['move-node-to-workspace personal2', 'mode main']
-shift-w = ['move-node-to-workspace work2', 'mode main']
-# join/resize share the _node mode
-j = 'mode _node' # join
-r = 'mode _node' # resize
 
+shift-h = ['join-with left', 'mode main']
+shift-j = ['join-with down', 'mode main']
+shift-k = ['join-with up', 'mode main']
+shift-l = ['join-with right', 'mode main']
+
+r = 'mode _node' # resize
 
 [mode._node.binding]
 esc = 'mode main'
-# resize
+### resize
 minus = 'resize smart -50'
 equal = 'resize smart +50'
-# join
-h = ['join-with left', 'mode main']
-j = ['join-with down', 'mode main']
-k = ['join-with up', 'mode main']
-l = ['join-with right', 'mode main']
+0 = ['balance-sizes', 'mode main']
 
 
 [mode.workspace.binding]
 esc = 'mode main'
-# swap layouts
+### alternate mappings
+# h = ['workspace --wrap-around prev', 'mode main']
+# l = ['workspace --wrap-around next', 'mode main']
+h = ['move-node-to-monitor prev --wrap-around', 'focus-monitor prev --wrap-around',  'mode main'] # used to be left
+l = ['move-node-to-monitor next --wrap-around', 'focus-monitor next --wrap-around',  'mode main'] # used to be right
+enter = ['layout tiles accordion horizontal', 'mode main']
+### swap layouts
 t = ['layout tiles horizontal vertical', 'mode main']
 a = ['layout accordion horizontal vertical', 'mode main']
-# focus workspaces 
+### focus workspaces 
 c = ['workspace chat', 'mode main']
-p = ['workspace personal2', 'workspace personal', 'mode main']
-w = ['workspace work2', 'workspace work', 'mode main']
-# reset layout
+p = ['workspace chat', 'workspace personal', 'mode main']
+w = ['workspace chat', 'workspace work', 'mode main']
+### reset layout
 shift-r = ['flatten-workspace-tree', 'mode main']
 
 
