@@ -9,10 +9,11 @@ function ls(){
 function l(){
     ls -l --group-directories-first -h --git $*
 }
+alias ll=l
 function la(){
     l -a $*
 }
-function ld(){
+function lD(){
     l -D $*
 }
 function lf(){
@@ -35,4 +36,13 @@ function git-prune-branches(){
 }
 function gw(){
     git worktree $*
+}
+
+# neovim
+alias v="nvim"
+function s(){
+  mkdir -p $HOME/scratch
+  _SCRATCH=scratch-$(date "+%Y-%m-%d-%H-%M-%S").md
+  touch $HOME/scratch/$_SCRATCH
+  nvim "+cd $HOME/scratch" $HOME/scratch/$_SCRATCH
 }
