@@ -1,4 +1,29 @@
-return { -- Autocompletion
+return {
+	"saghen/blink.cmp",
+	lazy = false, -- lazy loading handled internally
+	-- optional: provides snippets for the snippet source
+	dependencies = "rafamadriz/friendly-snippets",
+
+	-- use a release tag to download pre-built binaries
+	version = "v0.3",
+
+	opts = {
+		highlight = {
+		},
+		-- set to 'mono' for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
+		-- adjusts spacing to ensure icons are aligned
+		nerd_font_variant = "mono",
+
+		-- experimental auto-brackets support
+		-- accept = { auto_brackets = { enabled = true } }
+
+		-- experimental signature help support
+		-- trigger = { signature_help = { enabled = true } }
+	},
+}
+
+--[[
+  { -- Autocompletion
     "hrsh7th/nvim-cmp",
     event = "InsertEnter",
     dependencies = {
@@ -83,3 +108,4 @@ return { -- Autocompletion
         })
     end,
 }
+--]]
