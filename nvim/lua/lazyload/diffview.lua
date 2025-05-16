@@ -17,7 +17,7 @@ return {
       }
     })
 
-    vim.keymap.set("n", "<leader>dv", "<cmd>DiffviewOpen<CR>", {desc = "[D]iff[V]iew: Open"})
+    vim.keymap.set("n", "<leader>dv", "<cmd>DiffviewOpen -uno -- :!tmp<CR>", {desc = "[D]iff[V]iew: Open"})
     vim.keymap.set("n", "<leader>dV", "<cmd>DiffviewClose<CR>", {desc = "[D]iff[V]iew: Close"})
   end,
 }
