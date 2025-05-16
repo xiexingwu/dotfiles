@@ -50,14 +50,6 @@ function lua()
   vim.lsp.enable('lua_ls')
 end
 
-function marko()
-  vim.lsp.enable("marko-js")
-end
-
-function python()
-  vim.lsp.enable("ruff")
-end
-
 function rust()
   -- vim.lsp.config('rust_analyzer', {
   --   settings = {
@@ -80,8 +72,12 @@ return {
   config = function()
     local lspconfig = require("lspconfig")
 
+    vim.lsp.enable("bashls")
     lua()
-    marko()
+    -- Marko
+    vim.lsp.enable("marko-js")
+    -- Python
+    vim.lsp.enable("ruff")
     rust()
     ts()
   end
