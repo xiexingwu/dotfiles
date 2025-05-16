@@ -6,8 +6,10 @@
 	excludesfile = /Users/xiexingwu/.ignore
 	
 [alias]
-  f = fetch -p
-  s = status --column -sb
-  pr = pull --rebase
-  tree = log --oneline --graph
+  l = status --column -sb
+  ll = log --oneline --graph
 
+  ca = commit --amend
+
+  f = fetch -p
+  pr = pull --rebase
