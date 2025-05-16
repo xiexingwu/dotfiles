@@ -8,7 +8,6 @@ git init
 git add .
 git commit -m "Initial Staging"
 
-# for file in $(git ls-files); do
 for file in $(ls -A); do
   cp -vr $HOME/$file ./
 done
