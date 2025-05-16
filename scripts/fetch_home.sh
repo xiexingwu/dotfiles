@@ -8,5 +8,5 @@ if [[ -n $(git status --short -uno) ]]; then
 fi
 
 for file in $(ls -A ./home); do
-  echo cp -vr $HOME/$file ./home
+  cp -vr $HOME/$file ./home
 done
