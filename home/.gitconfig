@@ -1,0 +1,13 @@
+# This is Git's per-user configuration file.
+[user]
+	name = Michael Xie
+	email = xie.michael.x@gmail.com
+[core]
+	excludesfile = /Users/xiexingwu/.ignore
+	
+[alias]
+  f = fetch -p
+  s = status --column -sb
+  pr = pull --rebase
+  tree = log --oneline --graph
+

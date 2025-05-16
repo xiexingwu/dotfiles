@@ -1,0 +1,43 @@
+# terminal tools
+# brew "chezmoi"
+brew "antidote" 
+brew "eza"
+brew "fzf"
+brew "iamgemagick"
+brew "jless"
+brew "jq"
+brew "neovim"
+brew "rename" 
+brew "ripgrep" 
+brew "saulpw/vd/visidata"
+brew "sqlite"
+brew "z"
+brew "zsh" 
+
+# macos
+brew "FelixKratz/formulae/borders"
+cask "aerospace", args: { no_quarantine: true }
+cask "xcodes"
+
+# formatters
+brew "black" 
+brew "prettier" 
+brew "shfmt" 
+brew "sqlfluff"
+brew "stylua" 
+
+# fonts
+tap "homebrew/cask-fonts"
+brew "font-meslo-lg-nerd-font"
+
+# non-native apps
+cask "dropbox"
+cask "obsidian"
+cask "linearmouse"
+cask "rar"
+cask "vlc"
+cask "wechat"
+
+# environment manager
+brew "nvm"
+brew "pyenv"
