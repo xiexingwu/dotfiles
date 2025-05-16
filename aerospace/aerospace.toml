@@ -1,0 +1,144 @@
+# All possible keys:
+# - Letters.        a, b, c, ..., z
+# - Numbers.        0, 1, 2, ..., 9
+# - F-keys.         f1, f2, ..., f20
+# - Special keys.   minus, equal, period, comma, slash, backslash, quote, semicolon, backtick,
+#                   leftSquareBracket, rightSquareBracket, space, enter, esc, backspace, tab
+# - Arrows.         left, down, up, right
+
+# All possible modifiers: cmd, alt, ctrl, shift
+
+start-at-login = true
+after-login-command = [] # on user login
+after-startup-command = [ 'exec-and-forget borders' ] 
+
+accordion-padding = 30
+default-root-container-layout = 'accordion' # or tiles
+default-root-container-orientation = 'auto' # horizontal/vertical for wide/tall displays
+on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
+
+gaps.inner = { horizontal = 0, vertical = 0 }
+gaps.outer = { top = 3, bottom = 3, left = 3, right = 3 }
+
+# Float these apps by default
+[[on-window-detected]]
+if.app-name-regex-substring = '^(wechat|discord|messages)$'
+run = ['layout floating', 'move-node-to-workspace chat']
+[[on-window-detected]]
+if.app-name-regex-substring = '^(notes|1password|finder|karabiner-elements|bazecor|calendar|activity monitor|hammerspoon)$'
+run = 'layout floating'
+
+# Scracth terminal
+[[on-window-detected]]
+if.app-name-regex-substring = 'wezterm'
+if.window-title-regex-substring = 'scratch'
+run = 'layout floating'
+
+# Slack
+[[on-window-detected]]
+if.app-name-regex-substring = '^(slack)$'
+run = ['move-node-to-workspace work2']
+
+# forced workspace assignment
+[workspace-to-monitor-force-assignment]
+chat = ['^built-in', 'secondary']
+personal = 'main'
+personal2 = [3, 'secondary']
+work = 'main'
+work2 = [3, '^built-in']
+
+# main bindings
+[mode.main.binding]
+alt-semicolon = 'mode node'
+ctrl-alt-semicolon = 'mode workspace'
+
+## focus
+# alt-tab = 'focus-back-and-forth'
+### Window
+cmd-tab = 'focus-back-and-forth'
+alt-h = 'focus left --ignore-floating --boundaries all-monitors-outer-frame --boundaries-action stop'
+alt-j = 'focus down --ignore-floating --boundaries all-monitors-outer-frame --boundaries-action stop'
+alt-k = 'focus up --ignore-floating --boundaries all-monitors-outer-frame --boundaries-action stop'
+alt-l = 'focus right --ignore-floating --boundaries all-monitors-outer-frame --boundaries-action stop'
+alt-f = 'layout floating tiling' # toggle floating
+alt-enter = 'fullscreen'
+
+### Workspace
+ctrl-alt-h = 'workspace --wrap-around prev'
+ctrl-alt-l = 'workspace --wrap-around next'
+ctrl-alt-1 = ['workspace chat', 'workspace work2', 'workspace work', 'mode main']
+ctrl-alt-2 = ['workspace chat', 'workspace personal2', 'workspace personal', 'mode main']
+ctrl-alt-3 = ['workspace chat', 'mode main']
+
+## Move
+### Window
+alt-shift-h = 'move left'
+alt-shift-j = 'move down'
+alt-shift-k = 'move up'
+alt-shift-l = 'move right'
+### Window to monitor
+ctrl-alt-left = ['move-node-to-monitor prev --wrap-around', 'focus-monitor prev --wrap-around']
+ctrl-alt-right = ['move-node-to-monitor next --wrap-around', 'focus-monitor next --wrap-around']
+### Window to next workspace (follow)
+ctrl-alt-shift-h = ['move-node-to-workspace prev --wrap-around --focus-follows-window']
+ctrl-alt-shift-l = ['move-node-to-workspace next --wrap-around --focus-follows-window']
+### toggle workspace layout
+ctrl-alt-enter = 'layout tiles accordion horizontal'
+
+## Wezterm (migrate to hammerspoon)
+# cmd-ctrl-1 = ['exec-and-forget wezterm start --domain unix --workspace work' ]
+# cmd-ctrl-2 = ['exec-and-forget wezterm start --domain unix --workspace pers' ]
+
+## Misc Modes
+cmd-semicolon = 'mode service'
+
+[mode.node.binding]
+esc = 'mode main'
+f = ['layout floating tiling', 'mode main'] # Toggle floating and unfloat
+
+### dump to workspace
+c = ['move-node-to-workspace chat', 'mode main']
+p = ['move-node-to-workspace personal', 'mode main']
+w = ['move-node-to-workspace work', 'mode main']
+
+shift-h = ['join-with left', 'mode main']
+shift-j = ['join-with down', 'mode main']
+shift-k = ['join-with up', 'mode main']
+shift-l = ['join-with right', 'mode main']
+
+r = 'mode _node' # resize
+
+[mode._node.binding]
+esc = 'mode main'
+### resize
+minus = 'resize smart -50'
+equal = 'resize smart +50'
+0 = ['balance-sizes', 'mode main']
+
+
+[mode.workspace.binding]
+esc = 'mode main'
+### alternate mappings
+h = ['move-node-to-monitor prev --wrap-around', 'focus-monitor prev --wrap-around',  'mode main'] # used to be left
+l = ['move-node-to-monitor next --wrap-around', 'focus-monitor next --wrap-around',  'mode main'] # used to be right
+### swap layouts
+enter = ['layout tiles accordion horizontal', 'mode main']
+# t = ['layout tiles horizontal vertical', 'mode main']
+# a = ['layout accordion horizontal vertical', 'mode main']
+### focus workspaces 
+1 = ['workspace chat', 'workspace work', 'workspace work2', 'mode main']
+2 = ['workspace chat', 'workspace personal', 'workspace personal2', 'mode main']
+3 = ['workspace chat', 'mode main']
+q = 'focus-monitor 1'
+w = 'focus-monitor 2'
+e = 'focus-monitor 3'
+0 = 'focus-monitor main'
+
+### reset layout
+shift-r = ['flatten-workspace-tree', 'mode main']
+
+[mode.service.binding]
+esc = 'mode main'
+r = ['reload-config', 'mode main']
+t = ['enable toggle', 'mode main']
+

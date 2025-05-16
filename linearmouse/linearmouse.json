@@ -1,0 +1,123 @@
+{
+  "$schema" : "https:\/\/schema.linearmouse.app\/0.10.0",
+  "schemes" : [
+    {
+      "pointer" : {
+        "disableAcceleration" : false,
+        "acceleration" : 0,
+        "speed" : 0.2132
+      },
+      "if" : {
+        "device" : {
+          "vendorID" : "0x1532",
+          "productID" : "0x43",
+          "category" : "mouse",
+          "productName" : "Razer DeathAdder Chroma"
+        }
+      },
+      "scrolling" : {
+        "modifiers" : {
+          "vertical" : {
+            "command" : {
+              "type" : "zoom"
+            },
+            "shift" : {
+              "type" : "alterOrientation"
+            },
+            "option" : {
+              "type" : "preventDefault"
+            }
+          }
+        },
+        "speed" : {
+          "vertical" : 6.92
+        },
+        "reverse" : {
+          "vertical" : true
+        }
+      },
+      "buttons" : {
+        "mappings" : [
+          {
+            "shift" : false,
+            "button" : 3,
+            "action" : "mouse.button.back",
+            "control" : false,
+            "command" : false,
+            "option" : false
+          },
+          {
+            "control" : false,
+            "shift" : false,
+            "option" : false,
+            "action" : "mouse.button.forward",
+            "button" : 4,
+            "command" : false
+          }
+        ],
+        "universalBackForward" : false
+      }
+    },
+    {
+      "if" : {
+        "device" : {
+          "productName" : "Wired Gaming Mouse",
+          "productID" : "0x33",
+          "category" : "mouse",
+          "vendorID" : "0x258a"
+        }
+      },
+      "scrolling" : {
+        "reverse" : {
+          "vertical" : true
+        }
+      }
+    },
+    {
+      "if" : {
+        "device" : {
+          "productID" : "0x1b3c",
+          "serialNumber" : "0C044021AF9A0C26612B232EF5001C06",
+          "category" : "mouse",
+          "productName" : "Corsair Gaming HARPOON RGB Mouse",
+          "vendorID" : "0x1b1c"
+        }
+      },
+      "scrolling" : {
+        "reverse" : {
+          "vertical" : true
+        }
+      }
+    },
+    {
+      "if" : {
+        "device" : {
+          "category" : "mouse",
+          "vendorID" : "0xb05",
+          "productID" : "0x1a1c",
+          "productName" : "ROG CHAKRAM X"
+        }
+      },
+      "scrolling" : {
+        "reverse" : {
+          "vertical" : true
+        }
+      }
+    },
+    {
+      "scrolling" : {
+        "reverse" : {
+          "vertical" : true
+        }
+      },
+      "if" : {
+        "device" : {
+          "productID" : "0xc539",
+          "vendorID" : "0x46d",
+          "productName" : "USB Receiver",
+          "category" : "mouse"
+        }
+      }
+    }
+  ]
+}
