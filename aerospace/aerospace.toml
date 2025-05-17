@@ -25,13 +25,13 @@ gaps.outer = { top = 3, bottom = 3, left = 3, right = 3 }
 if.app-name-regex-substring = '^(wechat|discord|messages)$'
 run = ['layout floating', 'move-node-to-workspace chat']
 [[on-window-detected]]
-if.app-name-regex-substring = '^(notes|1password|finder|karabiner-elements|bazecor|calendar|activity monitor|hammerspoon)$'
+if.app-name-regex-substring = '^(notes|1password|finder|karabiner-elements|bazecor|calendar|activity monitor|hammerspoon|Preview|QuickTime Player|Docker)$'
 run = 'layout floating'
 
-# Scracth terminal
+# Scratch terminal
 [[on-window-detected]]
 if.app-name-regex-substring = 'wezterm'
-if.window-title-regex-substring = 'scratch'
+if.window-title-regex-substring = '_scratch'
 run = 'layout floating'
 
 # Slack
@@ -85,10 +85,6 @@ ctrl-alt-shift-l = ['move-node-to-workspace next --wrap-around --focus-follows-w
 ### toggle workspace layout
 ctrl-alt-enter = 'layout tiles accordion horizontal'
 
-## Wezterm (migrate to hammerspoon)
-# cmd-ctrl-1 = ['exec-and-forget wezterm start --domain unix --workspace work' ]
-# cmd-ctrl-2 = ['exec-and-forget wezterm start --domain unix --workspace pers' ]
-
 ## Misc Modes
 cmd-semicolon = 'mode service'
 
@@ -135,7 +131,7 @@ e = 'focus-monitor 3'
 0 = 'focus-monitor main'
 
 ### reset layout
-shift-r = ['flatten-workspace-tree', 'mode main']
+r = ['flatten-workspace-tree', 'mode main']
 
 [mode.service.binding]
 esc = 'mode main'

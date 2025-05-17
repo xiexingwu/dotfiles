@@ -1,6 +1,8 @@
 -- Run the folloiwng to set the config location
 --  defaults write org.hammerspoon.Hammerspoon MJConfigFile "~/.config/hammerspoon/init.lua"
 
+Logger = hs.logger.new("default", "info")
+
 -- CLI
 require("hs.ipc").cliInstall()
 require("hs.ipc").cliSaveHistory(true)
