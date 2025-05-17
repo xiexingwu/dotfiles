@@ -12,8 +12,8 @@ return
         normal_cur = "yss",
         normal_line = "ySS", -- not sure what this does. shadow with cur_line
         normal_cur_line = "ySS",
-        visual = "ys",
-        visual_line = "yS",
+        visual = "S",
+        visual_line = "S",
         delete = "ds",
         change = "cs",
         change_line = "cS",

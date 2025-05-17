@@ -1,3 +1,4 @@
+- better hotkeys for close/detach window 
 - on closing last pane in workspace, do not open other workspaces
   - alternatively, use different domains for work/personal?
 - Copy mode

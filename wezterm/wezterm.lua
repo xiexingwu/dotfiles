@@ -13,7 +13,8 @@ config.unix_domains = {
 
 config.selection_word_boundary = " \t\n{}[]()\"'`.,;:"
 config.switch_to_last_active_tab_when_closing_tab = true
--- set terminfo via this shell script:
+
+---- set terminfo via this shell script:
 --    tempfile=$(mktemp) \
 --    && curl -o $tempfile https://raw.githubusercontent.com/wezterm/wezterm/main/termwiz/data/wezterm.terminfo \
 --    && tic -x -o ~/.terminfo $tempfile \
