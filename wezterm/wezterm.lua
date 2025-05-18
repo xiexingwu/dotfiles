@@ -1,17 +1,19 @@
-local wezterm = require("wezterm")
+local wezterm = require("wezterm") --[[@as Wezterm]]
 
 local config = wezterm.config_builder()
 require("lua/startup").apply_to_config(config)
 require("lua/appearance").apply_to_config(config)
-require("lua/keys").apply_to_config(config) -- Overwrites all keys
--- require("lua/tabline").apply_to_config(config)
-require("lua/scrollback").apply_to_config(config)
+require("lua/keys").apply_to_config(config)    -- Overwrites all keys
+require("lua/tabline").apply_to_config(config) -- Overwrites all keys
+-- require("lua/scrollback").apply_to_config(config)
 
 config.unix_domains = {
   { name = 'unix', },
 }
+config.default_gui_startup_args = { 'connect', 'unix' }
 
 config.selection_word_boundary = " \t\n{}[]()\"'`.,;:"
+config.window_close_confirmation = "NeverPrompt" -- Default "AlwaysPrompt"
 config.switch_to_last_active_tab_when_closing_tab = true
 
 ---- set terminfo via this shell script:
