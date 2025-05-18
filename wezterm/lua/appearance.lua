@@ -73,7 +73,8 @@ end)
 local scratch = "_scratch" -- Keep this consistent with Hammerspoon
 wezterm.on("gui-attached", function(domain)
   local workspace = mux.get_active_workspace()
-  if workspace ~= scratch then return end
+  wezterm.GLOBAL.startup_workspace = workspace
+  if workspace ~= scratch then return nil end
 
   -- Compute width: 66% of screen width, up to 1000 px
   local width_ratio = 0.66

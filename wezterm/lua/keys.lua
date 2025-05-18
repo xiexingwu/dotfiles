@@ -14,12 +14,23 @@ function utils.contains(a, b)
   return false
 end
 
-function change_workspace(win, pane)
+function change_workspace(win, workspace)
+  wezterm.GLOBAL.unique_workspace = nil
+  wezterm.log_info("Clearing unique_workspace when changing to" .. workspace)
+  win:perform_action(act.SwitchToWorkspace{name = workspace}, win:active_pane())
+  -- local mwin = win:mux_window()
+  -- mwin:set_workspace(workspace)
+  -- wezterm.log_info(#mwin:tabs(), mwin:active_tab())
+  -- wezterm.log_info(#mwin:active_tab():panes(), mwin:active_tab():active_pane())
+end
+
+function select_workspace(win, pane)
   local workspace = win:active_workspace()
   local workspaces = wezterm.mux.get_workspace_names()
+  table.sort(workspaces)
   local choices = {}
   for _, ws in ipairs(workspaces) do
-    if ws:sub(1, 1) ~= "_" then
+    -- if ws:sub(1, 1) ~= "_" then
       local is_active = ws == workspace and " *" or ""
       local symbol = " "
       if ws == "pers" then
@@ -28,7 +39,7 @@ function change_workspace(win, pane)
         symbol = " "
       end
       table.insert(choices, { label = symbol .. ws .. is_active, id = ws })
-    end
+    -- end
   end
   win:perform_action(
     act.InputSelector {
@@ -36,7 +47,7 @@ function change_workspace(win, pane)
         if not id and not label then
           return
         end
-        win:mux_window():set_workspace(id)
+        change_workspace(win, id)
       end),
       title = "Workspace",
       choices = choices,
@@ -91,7 +102,7 @@ function module.apply_to_config(config)
     },
     { mods = "CMD",    key = "v",      action = act.PasteFrom("Clipboard") },
 
-    { mods = "LEADER", key = "p",      action = wezterm.action_callback(change_workspace), },
+    { mods = "LEADER", key = "p",      action = wezterm.action_callback(select_workspace), },
     { mods = "LEADER", key = "P",      action = act.ActivateCommandPalette },
     { mods = "LEADER", key = "E",      action = act.CharSelect }, -- [E]moji
 
@@ -114,7 +125,7 @@ function module.apply_to_config(config)
         cancel = wezterm.action_callback(function() end),
       },
     },
-    { mods = "LEADER", key = "q", action = act.QuitApplication, },
+    { mods = "LEADER",     key = "w",   action = act.QuitApplication, },
     {
       mods = "OPT",
       key = "w",
@@ -185,15 +196,9 @@ function module.apply_to_config(config)
       mods = 'CMD|SHIFT',
       key = 'N',
       action = act.PromptInputLine {
-        description = wezterm.format {
-          { Attribute = { Intensity = 'Bold' } },
-          { Foreground = { AnsiColor = 'Fuchsia' } },
-          { Text = 'Enter name for new workspace' },
-        },
-        action = wezterm.action_callback(function(window, pane, line)
-          if line then
-            window:perform_action(act.SwitchToWorkspace { name = line, }, pane)
-          end
+        description = 'Enter name for new workspace',
+        action = wezterm.action_callback(function(win, pane, line)
+          change_workspace(win, line)
         end),
       },
     },
