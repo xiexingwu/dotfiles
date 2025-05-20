@@ -17,7 +17,7 @@ end
 function change_workspace(win, workspace)
   wezterm.GLOBAL.unique_workspace = nil
   wezterm.log_info("Clearing unique_workspace when changing to" .. workspace)
-  win:perform_action(act.SwitchToWorkspace{name = workspace}, win:active_pane())
+  win:perform_action(act.SwitchToWorkspace { name = workspace }, win:active_pane())
   -- local mwin = win:mux_window()
   -- mwin:set_workspace(workspace)
   -- wezterm.log_info(#mwin:tabs(), mwin:active_tab())
@@ -165,6 +165,9 @@ function module.apply_to_config(config)
         pane:move_to_new_window(win:active_workspace())
       end)
     },
+
+    -- Resize window
+    { mods = "LEADER",      key = "0",    action = act.ResetFontAndWindowSize },
 
     -- Resize/activate panes (vanilla)
     { mods = "LEADER", key = "r",          action = act.ActivateKeyTable({ name = "resize_pane", one_shot = false }) },
