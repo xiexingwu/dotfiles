@@ -19,19 +19,19 @@
 (deflayermap (base)
   caps @cap
   fn (layer-while-held vi)
-  rmet (layer-switch vi)
+  rsft (layer-while-held vi)
+  ;; rmet (layer-switch vi)
 )
 
 (deflayermap (vi)
   i (layer-switch base)
   a (layer-switch base)
+  esc (layer-switch base)
   caps @vi-c
   lsft @vi-s
   lctl @vi-c
   lalt _
   lmet _
-
-  esc lrld
 
   up pgup
   down pgdn
@@ -84,5 +84,6 @@
 
   i (multi @vi-S M-left)
   a (multi @vi-S M-right)
+  esc (multi @vi-S lrld)
   _ _
 )
