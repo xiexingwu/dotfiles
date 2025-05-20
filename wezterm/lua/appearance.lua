@@ -1,5 +1,6 @@
 local wezterm = require("wezterm") --[[@as Wezterm]]
 local mux = wezterm.mux
+local act = wezterm.action
 
 local color_scheme = "catppuccin-mocha"
 local palette = wezterm.color.get_builtin_schemes()[color_scheme]
@@ -74,24 +75,24 @@ local scratch = "_scratch" -- Keep this consistent with Hammerspoon
 wezterm.on("gui-attached", function(domain)
   local workspace = mux.get_active_workspace()
   wezterm.GLOBAL.startup_workspace = workspace
-  if workspace ~= scratch then return nil end
-
-  -- Compute width: 66% of screen width, up to 1000 px
-  local width_ratio = 0.66
-  local width_max = 1000
-  local aspect_ratio = 16 / 9
-  local screen = wezterm.gui.screens().active
-  local width = math.min(screen.width * width_ratio, width_max)
-  local height = width / aspect_ratio
+  -- if workspace ~= scratch then return nil end
 
   for _, window in ipairs(mux.all_windows()) do
     local gwin = window:gui_window()
-    gwin:set_config_overrides({ window_decorations = "INTEGRATED_BUTTONS" })
     if gwin ~= nil then
+      if workspace ~= scratch then gwin:set_config_overrides({ window_decorations = "INTEGRATED_BUTTONS" }) end
       gwin:perform_action(act.SetWindowLevel "AlwaysOnTop", gwin:active_pane())
-      gwin:set_inner_size(width, height)
     end
   end
+end)
+
+---Handles situations where another window attaches to an existing workspace and a TWM resizs it,
+---causing existing window to have insensible inner size.
+wezterm.on('update-status', function(win, pane)
+  if not win:is_focused() then return end
+
+  local dims = win:get_dimensions()
+  win:set_inner_size(dims.pixel_width, dims.pixel_height)
 end)
 
 return {
@@ -101,6 +102,9 @@ return {
     -- config.font = wezterm.font("MesloLGM Nerd Font Mono")
     config.font = wezterm.font("JetBrains Mono")
     config.font_size = 14
+
+    config.initial_rows = 30
+    config.initial_cols = 120
 
     config.enable_scroll_bar = true
     config.command_palette_font_size = 14
