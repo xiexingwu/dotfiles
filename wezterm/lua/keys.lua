@@ -31,14 +31,14 @@ function select_workspace(win, pane)
   local choices = {}
   for _, ws in ipairs(workspaces) do
     -- if ws:sub(1, 1) ~= "_" then
-      local is_active = ws == workspace and " *" or ""
-      local symbol = " "
-      if ws == "pers" then
-        symbol = "󰋞 "
-      elseif ws == "work" then
-        symbol = " "
-      end
-      table.insert(choices, { label = symbol .. ws .. is_active, id = ws })
+    local is_active = ws == workspace and " *" or ""
+    local symbol = " "
+    if ws == "pers" then
+      symbol = "󰋞 "
+    elseif ws == "work" then
+      symbol = " "
+    end
+    table.insert(choices, { label = symbol .. ws .. is_active, id = ws })
     -- end
   end
   win:perform_action(

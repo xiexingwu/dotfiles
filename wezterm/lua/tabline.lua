@@ -51,11 +51,8 @@ wezterm.on("update-status", function(win, pane)
   local left_texts = { mode, workspace }
 
   -- Right
-  local cwd = ""
-  if not pcall(function() pane:get_current_working_dir() end) then
-    cwd = pane:get_current_working_dir()
-    cwd = cwd and cwd.file_path or ""
-  end
+  local cwd = pane:get_current_working_dir() -- Wezterm bug, this may spit out warnings on Confirmation panes
+  cwd = cwd and cwd.file_path or ""
   pane:get_current_working_dir()
   local pid = wezterm.procinfo.pid()
   local win_id = win:window_id()
