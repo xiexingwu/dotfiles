@@ -29,8 +29,8 @@ vim.keymap.set("n", "<leader>y", [[mzV"+yzz]])
 vim.keymap.set("n", "<C-q>", vim.cmd.quit, { desc = "Quit window" })
 vim.keymap.set("n", "<leader>bo", ":%bd|e#<CR>", { desc = "Keep This [B]uffer [O]nly" })
 vim.keymap.set("n", "<C-i>", "<Tab>", { desc = "Jumplist" }) -- gets overwrriten if Tab is remapped
-vim.keymap.set("n", "<Tab>", "<C-Tab>", { desc = "Alternate Tab" })
-vim.keymap.set("n", "<S-Tab>", "gt", { desc = "Next Tab" })
+vim.keymap.set("n", "<Tab>", "gt", { desc = "Next Tab" })
+vim.keymap.set("n", "<S-Tab>", "<C-Tab>", { desc = "Alternate Tab" })
 
 -- misc
 vim.keymap.set("n", "Q", "<nop>") -- use @@
