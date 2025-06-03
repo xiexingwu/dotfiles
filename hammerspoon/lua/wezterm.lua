@@ -88,6 +88,6 @@ function wez.summon(workspace)
   end
 end
 
-hs.hotkey.bind({ "alt" }, "`", function() wez.summon(scratch) end)
-hs.hotkey.bind({ "alt" }, "1", function() wez.summon("work") end)
-hs.hotkey.bind({ "alt" }, "2", function() wez.summon("pers") end)
+-- hs.hotkey.bind({ "alt" }, "`", function() wez.summon(scratch) end)
+-- hs.hotkey.bind({ "alt" }, "1", function() wez.summon("work") end)
+-- hs.hotkey.bind({ "alt" }, "2", function() wez.summon("pers") end)
