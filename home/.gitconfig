@@ -4,12 +4,25 @@
 	email = xie.michael.x@gmail.com
 [core]
 	excludesfile = /Users/xiexingwu/.ignore
+  pager = delta
 	
 [alias]
-  l = status --column -sb
+  ls = status --column -sb
   ll = log --oneline --graph
 
   ca = commit --amend
 
   f = fetch -p
   pr = pull --rebase
+  co = checkout
+
+[interactive]
+  diffFilter = delta --color-only
+
+[delta]
+  navigate = true  # use n and N to move between diff sections
+  dark = true      # or light = true, or omit for auto-detection
+  side-by-side = true
+
+[merge]
+  conflictstyle = zdiff3
