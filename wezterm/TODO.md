@@ -1,8 +1,0 @@
-- better hotkeys for close/detach window 
-- Copy mode
-  - key to yank without close
-    - remove selection after yank?
-  - scroll screen before/after close
-  - Esc to quit unless there's a selection
-- Quick select mode
-  - navigate to url
