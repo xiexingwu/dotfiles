@@ -1,5 +1,3 @@
-ZDIR=$HOME/.zdir
-
 # antidote
 source ${HOMEBREW_PREFIX}/opt/antidote/share/antidote/antidote.zsh
 antidote load ${ZDIR}/.zsh_plugins.txt
