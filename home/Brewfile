@@ -1,43 +1,51 @@
-# terminal tools
-# brew "chezmoi"
+# CLI tools
+brew "zsh" 
 brew "antidote" 
-brew "eza"
 brew "fzf"
-brew "iamgemagick"
+brew "imagemagick@7" # pin since slow build
 brew "jless"
 brew "jq"
-brew "neovim"
 brew "rename" 
-brew "ripgrep" 
-brew "saulpw/vd/visidata"
-brew "sqlite"
 brew "z"
-brew "zsh" 
+brew "starship"
+brew "ast-grep"
+
+brew "ripgrep"
+brew "eza"
+brew "uutils-coreutils"
+brew "uutils-diffutils"
+brew "dust"
+
+# CLI apps
+brew "neovim", args: ["HEAD"]
+brew "zellij"
+brew "zk"
+brew "yazi"
 
 # macos
 brew "FelixKratz/formulae/borders"
+brew "kanata"
 cask "aerospace", args: { no_quarantine: true }
 cask "xcodes"
+cask "ghostty"
+cask "keycastr"
+cask "sioyek"
 
 # formatters
-brew "black" 
 brew "prettier" 
-brew "shfmt" 
-brew "sqlfluff"
 brew "stylua" 
 
 # fonts
-tap "homebrew/cask-fonts"
-brew "font-meslo-lg-nerd-font"
+cask "font-meslo-lg-nerd-font"
 
 # non-native apps
-cask "dropbox"
-cask "obsidian"
-cask "linearmouse"
-cask "rar"
-cask "vlc"
-cask "wechat"
+# cask "dropbox"
+# cask "linearmouse"
+# cask "rar"
+# cask "vlc"
+# cask "wechat"
 
-# environment manager
-brew "nvm"
-brew "pyenv"
+# languages
+# brew "nvm"
+# brew "pyenv"
+# brew "typst"
