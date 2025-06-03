@@ -86,7 +86,7 @@ ctrl-alt-shift-l = ['move-node-to-workspace next --wrap-around --focus-follows-w
 ctrl-alt-enter = 'layout tiles accordion horizontal'
 
 ## Misc Modes
-cmd-semicolon = 'mode service'
+cmd-shift-semicolon = 'mode service'
 
 [mode.node.binding]
 esc = 'mode main'

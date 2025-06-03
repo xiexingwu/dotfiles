@@ -1,0 +1,5 @@
+# This is the config for scratch terminals, e.g. scrollback & scratch text
+quit-after-last-window-closed = true
+
+config-file = conf/settings.conf
+config-file = conf/keybinds.conf
