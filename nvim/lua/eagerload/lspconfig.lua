@@ -67,6 +67,10 @@ function ts()
   vim.lsp.enable('ts_ls')
 end
 
+function zig()
+  vim.lsp.enable("zls")
+end
+
 return {
   'neovim/nvim-lspconfig',
   config = function()
@@ -74,11 +78,14 @@ return {
 
     vim.lsp.enable("bashls")
     lua()
+    -- Markdown
+    vim.lsp.enable('marksman')
     -- Marko
     vim.lsp.enable("marko-js")
     -- Python
     vim.lsp.enable("ruff")
     rust()
     ts()
+    zig()
   end
 }

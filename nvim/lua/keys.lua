@@ -51,7 +51,7 @@ vim.keymap.set("n", "<space>q", vim.diagnostic.setloclist)
 vim.keymap.set("n", "<leader>rr", "<cmd>source" .. vim.api.nvim_eval("$MYVIMRC") .. "<CR>", { desc = "[R]eload config" })
 -- See Snacks.picker for picker-related LSP functions
 vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { desc = "LSP: [R]e[n]ame" })
-vim.keymap.set("n", "<leader>fm", vim.lsp.buf.format, { desc = "LSP: [F]or[m]at" })
+-- vim.keymap.set("n", "<leader>fm", vim.lsp.buf.format, { desc = "LSP: [F]or[m]at" })
 vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, { desc = "[D]iagnostic popup" })
 
 -- wezterm integration
@@ -64,24 +64,27 @@ local nav = {
 
 local function navigate(dir)
   return function()
-    print("triggered " .. dir)
     -- First change nvim window
     local win = vim.api.nvim_get_current_win()
     vim.cmd.wincmd(dir)
 
-    -- Then try to change wezterm pane
-    local pane = vim.env.WEZTERM_PANE
+    -- Then try to change zellij pane
+    local pane = vim.env.ZELLIJ
     local pane_dir = nav[dir]
+    local action = "move-focus"
+    if pane_dir == "Left" or pane_dir == "Right" then
+      action = "move-focus-or-tab"
+    end
     if pane and win == vim.api.nvim_get_current_win() then
       vim.system(
-        { "wezterm", "cli", "activate-pane-direction", pane_dir },
+        { "zellij", "action", action, pane_dir },
         { text = true },
         function(p)
           if p.code ~= 0 then
             vim.notify(
               "Failed to move to pane " .. pane_dir .. "\n" .. p.stderr,
               vim.log.levels.ERROR,
-              { title = "Wezterm" }
+              { title = "Zellij" }
             )
           end
         end)
@@ -93,5 +96,3 @@ end
 for key, dir in pairs(nav) do
   vim.keymap.set("n", "<C-" .. key .. ">", navigate(key), { desc = "smart-split: " .. dir })
 end
-vim.keymap.set("n", "<S-H>", function() vim.cmd.wincmd("h") end, { desc = "smart-split: Left" })
-vim.keymap.set("n", "<S-L>", function() vim.cmd.wincmd("l") end, { desc = "smart-split: Right" })
