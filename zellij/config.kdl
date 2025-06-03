@@ -41,7 +41,7 @@ keybinds clear-defaults=true {
     bind "ctrl s" {SwitchToMode "pane";} // [S]plit
     bind "ctrl t" {SwitchToMode "tab";}
     bind "ctrl /" { SwitchToMode "entersearch"; SearchInput 0; }
-    bind "ctrl h" {SwitchToMode "scroll";} // [H]istory
+    bind "ctrl y" {SwitchToMode "scroll";} // Histor[y]
 
     // bind "ctrl ;" {SwitchToMode "session";}
     // bind "ctrl t" {SwitchToMode "tmux";}
