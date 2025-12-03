@@ -1,19 +1,40 @@
 {
-  "$schema" : "https:\/\/schema.linearmouse.app\/0.10.0",
+  "$schema" : "https:\/\/schema.linearmouse.app\/0.10.2",
   "schemes" : [
     {
-      "pointer" : {
-        "disableAcceleration" : false,
-        "acceleration" : 0,
-        "speed" : 0.2132
+      "buttons" : {
+        "mappings" : [
+          {
+            "action" : "mouse.button.back",
+            "button" : 3,
+            "command" : false,
+            "control" : false,
+            "option" : false,
+            "shift" : false
+          },
+          {
+            "action" : "mouse.button.forward",
+            "button" : 4,
+            "command" : false,
+            "control" : false,
+            "option" : false,
+            "shift" : false
+          }
+        ],
+        "universalBackForward" : false
       },
       "if" : {
         "device" : {
-          "vendorID" : "0x1532",
-          "productID" : "0x43",
           "category" : "mouse",
-          "productName" : "Razer DeathAdder Chroma"
+          "productID" : "0x43",
+          "productName" : "Razer DeathAdder Chroma",
+          "vendorID" : "0x1532"
         }
+      },
+      "pointer" : {
+        "acceleration" : 0,
+        "disableAcceleration" : false,
+        "speed" : 0.2132
       },
       "scrolling" : {
         "modifiers" : {
@@ -21,51 +42,33 @@
             "command" : {
               "type" : "zoom"
             },
-            "shift" : {
-              "type" : "alterOrientation"
-            },
             "option" : {
               "type" : "preventDefault"
+            },
+            "shift" : {
+              "type" : "alterOrientation"
             }
           }
         },
-        "speed" : {
-          "vertical" : 6.92
-        },
         "reverse" : {
           "vertical" : true
+        },
+        "speed" : {
+          "vertical" : 6.92
         }
-      },
-      "buttons" : {
-        "mappings" : [
-          {
-            "shift" : false,
-            "button" : 3,
-            "action" : "mouse.button.back",
-            "control" : false,
-            "command" : false,
-            "option" : false
-          },
-          {
-            "control" : false,
-            "shift" : false,
-            "option" : false,
-            "action" : "mouse.button.forward",
-            "button" : 4,
-            "command" : false
-          }
-        ],
-        "universalBackForward" : false
       }
     },
     {
       "if" : {
         "device" : {
-          "productName" : "Wired Gaming Mouse",
-          "productID" : "0x33",
           "category" : "mouse",
+          "productID" : "0x33",
+          "productName" : "Wired Gaming Mouse",
           "vendorID" : "0x258a"
         }
+      },
+      "pointer" : {
+        "speed" : 0.2582
       },
       "scrolling" : {
         "reverse" : {
@@ -76,10 +79,10 @@
     {
       "if" : {
         "device" : {
-          "productID" : "0x1b3c",
-          "serialNumber" : "0C044021AF9A0C26612B232EF5001C06",
           "category" : "mouse",
+          "productID" : "0x1b3c",
           "productName" : "Corsair Gaming HARPOON RGB Mouse",
+          "serialNumber" : "0C044021AF9A0C26612B232EF5001C06",
           "vendorID" : "0x1b1c"
         }
       },
@@ -90,12 +93,62 @@
       }
     },
     {
+      "buttons" : {
+        "universalBackForward" : true
+      },
       "if" : {
         "device" : {
           "category" : "mouse",
-          "vendorID" : "0xb05",
           "productID" : "0x1a1c",
-          "productName" : "ROG CHAKRAM X"
+          "productName" : "ROG CHAKRAM X",
+          "vendorID" : "0xb05"
+        }
+      },
+      "pointer" : {
+        "acceleration" : "unset",
+        "disableAcceleration" : false,
+        "redirectsToScroll" : false,
+        "speed" : "unset"
+      },
+      "scrolling" : {
+        "acceleration" : {
+          "vertical" : 1
+        },
+        "distance" : {
+          "vertical" : "auto"
+        },
+        "modifiers" : {
+          "vertical" : {
+            "command" : {
+              "type" : "zoom"
+            },
+            "control" : {
+              "scale" : 4,
+              "type" : "changeSpeed"
+            },
+            "option" : {
+              "type" : "pinchZoom"
+            },
+            "shift" : {
+              "type" : "alterOrientation"
+            }
+          }
+        },
+        "reverse" : {
+          "vertical" : true
+        },
+        "speed" : {
+          "vertical" : 0
+        }
+      }
+    },
+    {
+      "if" : {
+        "device" : {
+          "category" : "mouse",
+          "productID" : "0xc539",
+          "productName" : "USB Receiver",
+          "vendorID" : "0x46d"
         }
       },
       "scrolling" : {
@@ -105,17 +158,39 @@
       }
     },
     {
-      "scrolling" : {
-        "reverse" : {
-          "vertical" : true
-        }
-      },
       "if" : {
         "device" : {
-          "productID" : "0xc539",
-          "vendorID" : "0x46d",
-          "productName" : "USB Receiver",
-          "category" : "mouse"
+          "category" : "mouse",
+          "productID" : "0x1a18",
+          "productName" : "ROG CHAKRAM X",
+          "vendorID" : "0xb05"
+        }
+      },
+      "pointer" : {
+        "acceleration" : 0.6561,
+        "disableAcceleration" : true,
+        "speed" : 0.4061
+      },
+      "scrolling" : {
+        "modifiers" : {
+          "vertical" : {
+            "command" : {
+              "type" : "zoom"
+            },
+            "control" : {
+              "scale" : 2,
+              "type" : "changeSpeed"
+            },
+            "option" : {
+              "type" : "pinchZoom"
+            },
+            "shift" : {
+              "type" : "alterOrientation"
+            }
+          }
+        },
+        "reverse" : {
+          "vertical" : true
         }
       }
     }
