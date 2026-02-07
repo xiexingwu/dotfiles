@@ -2,6 +2,7 @@
   process-unmapped-keys yes
   macos-dev-names-exclude (
     "RAISE2"
+    "ROG CHAKRAM X"
   )
 )
 
@@ -9,7 +10,7 @@
 (defsrc)
 
 (defalias
-  cap (tap-hold 200 200 esc ctl)
+  cap (tap-hold-press 200 200 esc ctl)
   vi-s (multi sft (layer-while-held vi-s))
   vi-c (multi ctl (layer-while-held vi-c))
   vi-S (release-key sft)

@@ -7,11 +7,9 @@
 
     <key>ProgramArguments</key>
     <array>
-        <string>/opt/homebrew/bin/kanata</string>
+        <string>/Users/xiexingwu/.cargo/bin/kanata</string>
         <string>-c</string>
         <string>/Users/xiexingwu/.config/kanata/kanata.kbd</string>
-        <string>--port</string>
-        <string>10000</string>
     </array>
 
     <key>RunAtLoad</key>
