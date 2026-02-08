@@ -1,6 +1,7 @@
 vim.opt.number = false
 vim.opt.relativenumber = false
 vim.opt.title = true
+vim.opt.showmode = false
 
 vim.g.markdown_recommended_style = 0
 vim.opt.tabstop = 2

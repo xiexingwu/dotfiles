@@ -15,8 +15,8 @@ return {
   {
     "tpope/vim-eunuch",
     config = function()
-      vim.keymap.set("n", "<leader>mv", rename_file_with_input, { desc = "[M]o[v]e / rename (vim-eunuch)" }) -- need input for filename
-      vim.keymap.set("n", "<leader>rm", "<Cmd>Remove<CR>", { desc = "[R]e[m]ove / delete (vim-eunuch)" })
+      vim.keymap.set("n", "<localleader>mv", rename_file_with_input, { desc = "[M]o[v]e / rename (vim-eunuch)" }) -- need input for filename
+      vim.keymap.set("n", "<localleader>rm", "<Cmd>Remove<CR>", { desc = "[R]e[m]ove / delete (vim-eunuch)" })
     end
   },
 }

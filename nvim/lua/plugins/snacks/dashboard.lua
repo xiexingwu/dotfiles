@@ -1,7 +1,7 @@
 return {
   preset = {
     keys = {
-      { icon = " ", key = "<leader>", desc = "Restore Session", section = "session" },
+      { icon = " ", key = "<Enter>", desc = "Restore Session", section = "session" },
       { icon = " ", key = "q", desc = "Quit", action = ":qa" },
     },
   },

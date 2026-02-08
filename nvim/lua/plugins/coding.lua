@@ -51,12 +51,6 @@ return {
     }
   },
 
-  -- Comments
-  {
-    "numToStr/Comment.nvim",
-    opts = {},
-  },
-
   -- Find & Replace
   {
     'MagicDuck/grug-far.nvim',
@@ -64,21 +58,21 @@ return {
       local grug = require('grug-far');
       grug.setup();
 
-      vim.keymap.set('n', '<leader>F',
+      vim.keymap.set('n', '<C-F>F',
         function() grug.open() end,
         { desc = 'Grug: [F]ind' }
       )
-      vim.keymap.set('n', '<leader>ff',
+      vim.keymap.set('n', '<C-F>f',
         function() grug.open({ prefills = { paths = vim.fn.expand("%") } }) end,
-        { desc = "Grug: [F]ind in [F]ile" })
+        { desc = "Grug: Find in [f]ile" })
 
-      vim.keymap.set('n', '<leader>sg',
+      vim.keymap.set('n', '<C-F>s',
         function() grug.open({ engine = 'astgrep' }) end,
-        { desc = "Grug: [S]emantic [G]rep (ast-grep)" })
+        { desc = "Grug: [S]emantic Grep (ast-grep)" })
 
-      vim.keymap.set('n', '<leader>fw',
-        function() grug.open({ prefills = { search = vim.fn.expand("<cword>") } }) end,
-        { desc = "Grug: [F]ind this [W]ord" })
+      -- vim.keymap.set('n', '<C-F>w',
+      --   function() grug.open({ prefills = { search = vim.fn.expand("<cword>") } }) end,
+      --   { desc = "Grug: [F]ind this [W]ord" })
 
       vim.api.nvim_create_autocmd('FileType', {
         group = vim.api.nvim_create_augroup('grug-far-keymap', { clear = true }),
@@ -116,17 +110,17 @@ return {
       set({ "n", "v" }, "<leader>n", function() mc.matchAddCursor(1) end, { desc = "MC: [n]ext" })
 
       -- bring back cursors if you accidentally clear them
-      set("n", "<leader>mr", mc.restoreCursors, { desc = "[M]C: [r]estore" })
+      -- set("n", "<leader>mr", mc.restoreCursors, { desc = "[M]C: [r]estore" })
 
       -- Add all matches in the document
-      set({ "n", "v" }, "<leader>ma", mc.matchAllAddCursors, { desc = "[M]C: [A]ll" }) -- BUG: breaks if no search and cursor on ({""}) and maybe other symbols?
+      -- set({ "n", "v" }, "<leader>ma", mc.matchAllAddCursors, { desc = "[M]C: [A]ll" }) -- BUG: breaks if no search and cursor on ({""}) and maybe other symbols?
 
       -- Rotate the main cursor.
       set({ "n", "v" }, "<left>", mc.prevCursor, { desc = "MC: previous cursor" })
       set({ "n", "v" }, "<right>", mc.nextCursor, { desc = "MC: next cursor" })
 
       -- Split visual selections by regex.
-      set("v", "<leader>mS", mc.splitCursors, { desc = "[M]C: [S]plit" })
+      -- set("v", "<leader>mS", mc.splitCursors, { desc = "[M]C: [S]plit" })
 
       -- Append/insert for each line of visual selections.
       set("v", "I", mc.insertVisual, { desc = "MC: Visual Insert" })

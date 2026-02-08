@@ -1,12 +1,6 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = ";"
 
-vim.keymap.set("n", "<leader>qq", ":qa")
-vim.keymap.set("n", "<leader>ww", ":wa")
--- visual mode move line up/down
-vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
-vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
-
 -- Editing
 vim.keymap.set("n", "J", "mzJ`z") -- Join but keep cursor position
 -- Add empty lines before and after cursor line
@@ -39,8 +33,6 @@ vim.keymap.set("n", "<leader>;", "q:", { desc = "Open Command-line window" })
 vim.keymap.set("n", "q:", "<nop>")
 vim.keymap.set("n", "\\", "<C-^>", { desc = "Alternate file" })
 
-vim.keymap.set("n", "<leader>l", "<cmd>noh<CR>", { desc = "Clear highlights" })
-vim.keymap.set("n", "<leader>dm", "<cmd>delm!<CR>", { desc = "[D]elete [M]arks" })
 vim.keymap.set("n", "<leader>tw", "<cmd>set wrap!<CR>", { desc = "[T]oggle [W]rap" })
 
 vim.keymap.set('n', '<space>K', vim.diagnostic.open_float)

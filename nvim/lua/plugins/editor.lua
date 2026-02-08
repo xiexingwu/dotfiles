@@ -1,23 +1,31 @@
 return {
+  -- Marks
   {
-    "folke/which-key.nvim",
-    event = "VeryLazy",
-    keys = { "<leader>", "<c-r>", "<c-w>", '"', "'", "`", "c", "v", "g" },
-    opts = {
-      -- your configuration comes here
-      -- or leave it empty to use the default settings
-      -- refer to the configuration section below
-    },
+    "TheNoeTrevino/haunt.nvim",
+    opts = {},
+    config = function()
+      local haunt = require("haunt.api")
+      local haunt_picker = require("haunt.picker")
+      vim.keymap.set("n", "<leader>mm", haunt.annotate, { desc = "[H]aunt: [A]nnotate" })
+      vim.keymap.set("n", "<leader>md", haunt.delete, { desc = "[H]aunt: [D]elete Annotation" })
+      vim.keymap.set("n", "<leader>mc", haunt.clear_all, { desc = "[H]aunt: [C]lear All Annotations" })
+      vim.keymap.set("n", "<leader>mt", haunt.toggle_all_lines, { desc = "[H]aunt: [T]oggle" })
+      vim.keymap.set("n", "<leader>mq", haunt.to_quickfix, { desc = "[H]aunt: To [Q]uickfix" })
+      vim.keymap.set("n", "<leader>mQ", function() haunt.to_quickfix({ current_buffer = true }) end,
+        { desc = "[H]aunt: To [Q]uickfix (current buf)" })
+      vim.keymap.set("n", "<leader>mp", haunt_picker.show, { desc = "[H]aunt: [P]ick" })
+    end
   },
 
+  -- Session
   {
     "folke/persistence.nvim",
     event = "BufReadPre", -- this will only start session saving when an actual file was opened
-    opts = {
-      -- add any custom options here
-    }
+    opts = {},
   },
 
+
+  -- Motions
   {
     "folke/flash.nvim",
     event = "VeryLazy",
@@ -27,11 +35,8 @@ return {
     },
     -- stylua: ignore
     keys = {
-      { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end,       desc = "Flash" },
-      { "S", mode = { "n", "x", "o" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
-      -- { "r",     mode = "o",               function() require("flash").remote() end,            desc = "Remote Flash" },
-      -- { "R",     mode = { "o", "x" },      function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
-      -- { "<c-s>", mode = { "c" },           function() require("flash").toggle() end,            desc = "Toggle Flash Search" },
+      { "<C-CR>",   mode = { "n" }, function() require("flash").jump() end,       desc = "Flash" },
+      { "<C-S-CR>", mode = { "n" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
     },
   },
 
@@ -58,6 +63,7 @@ return {
     },
   },
 
+  -- CLI integrations
   {
     "zk-org/zk-nvim",
     config = function()
