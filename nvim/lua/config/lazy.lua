@@ -27,4 +27,4 @@ require("lazy").setup(
     },
   }
 )
-vim.keymap.set("n", "<leader>L", ":Lazy<CR>")
+vim.keymap.set("n", "<leader>L", ":Lazy<CR>", { desc = "[L]azy" })

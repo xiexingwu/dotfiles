@@ -90,10 +90,10 @@ return {
         },
       })
 
-      local opts = { noremap = true, silent = false }
-
-      vim.api.nvim_set_keymap("n", "<leader>zkn", "<Cmd>ZkNew { title = vim.ui.input('Title: ') }<CR>", opts)
-      vim.api.nvim_set_keymap("n", "<leader>zkl", "<Cmd>ZkNotes { sort = { 'modified' } }<CR>", opts)
+      vim.api.nvim_set_keymap("n", "<leader>zn", "<Cmd>ZkNew { title = vim.ui.input('Title: ') }<CR>",
+        { desc = "ZK: [N]ew", noremap = true, silent = false })
+      vim.api.nvim_set_keymap("n", "<leader>zl", "<Cmd>ZkNotes { sort = { 'modified' } }<CR>",
+        { desc = "ZK: [L]ist", noremap = true, silent = false })
     end,
   }
 }

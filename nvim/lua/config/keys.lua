@@ -16,36 +16,41 @@ vim.keymap.set("n", "<leader>tsb", ":set scrollbind!<CR>", { desc = "[T]oggle [S
 
 -- yank to system copy/paste
 vim.keymap.set("v", "<T-C>", [["+y]])
-vim.keymap.set("v", "<leader>y", [["+y]])
+vim.keymap.set("v", "<leader>y", [["+y]], { desc = '[Y]ank to Pasteboard' })
 -- vim.keymap.set("n", "<leader>y", [[mzV"+yzz]])
-vim.keymap.set("n", "<leader>y%", [[<cmd>let @+=@%<CR>]])
+-- vim.keymap.set("n", "<leader>y%", [[<cmd>let @+=@%<CR>]])
 
 -- buffers/windows/tabs
 vim.keymap.set("n", "<C-q>", vim.cmd.quit, { desc = "Quit window" })
 vim.keymap.set("n", "<leader>bo", ":%bd|e#<CR>", { desc = "Keep This [B]uffer [O]nly" })
-vim.keymap.set("n", "<C-i>", "<Tab>", { desc = "Jumplist" }) -- gets overwrriten if Tab is remapped
 vim.keymap.set("n", "<Tab>", "gt", { desc = "Next Tab" })
-vim.keymap.set("n", "<S-Tab>", "<C-Tab>", { desc = "Alternate Tab" })
+vim.keymap.set("n", "<S-Tab>", "gT", { desc = "Alternate Tab" })
+vim.keymap.set("n", "<C-W>\\", "<C-W>^", { desc = "Split [Alternate]" })
+vim.keymap.set("n", "<C-W>gt", "<C-W>T", { desc = "Split -> [T]ab" })
+vim.keymap.del("n", "<C-W><C-D>");
+
+-- Terminal
+vim.keymap.set("t", "<C-\\><C-\\>", "<C-\\><C-N>", {desc = "Terminal Escape"})
+
+-- Folds
+vim.keymap.set("n", "zo", "zO", { desc = "Fold [O]pen (recursive)" })
+vim.keymap.set("n", "zc", "zC", { desc = "Fold [C]lose (recursive)" })
 
 -- misc
 vim.keymap.set("n", "Q", "<nop>") -- use @@
-vim.keymap.set("n", "<leader>;", "q:", { desc = "Open Command-line window" })
+vim.keymap.set("n", "<leader>;", "q:", { desc = "Cmdline window" })
 vim.keymap.set("n", "q:", "<nop>")
 vim.keymap.set("n", "\\", "<C-^>", { desc = "Alternate file" })
 
 vim.keymap.set("n", "<leader>tw", "<cmd>set wrap!<CR>", { desc = "[T]oggle [W]rap" })
 
-vim.keymap.set('n', '<space>K', vim.diagnostic.open_float)
-vim.keymap.set("n", "<space>q", vim.diagnostic.setloclist)
-
--- vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
-
 -- reload init.lua
-vim.keymap.set("n", "<leader>rr", "<cmd>source" .. vim.api.nvim_eval("$MYVIMRC") .. "<CR>", { desc = "[R]eload config" })
--- See Snacks.picker for picker-related LSP functions
-vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { desc = "LSP: [R]e[n]ame" })
--- vim.keymap.set("n", "<leader>fm", vim.lsp.buf.format, { desc = "LSP: [F]or[m]at" })
-vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, { desc = "[D]iagnostic popup" })
+vim.keymap.set("n", "<leader>R", "<cmd>source" .. vim.api.nvim_eval("$MYVIMRC") .. "<CR>", { desc = "[R]eload config" })
+
+-- LSP See Snacks.picker for picker-related LSP functions
+vim.keymap.set('n', '<space>ld', vim.diagnostic.open_float, { desc = "LSP [D]iagnostic (Popup)" })
+vim.keymap.set("n", "<space>ll", vim.diagnostic.setloclist, { desc = "LSP diagnostic [L]oclist" })
+vim.keymap.set("n", "<leader>lr", vim.lsp.buf.rename, { desc = "LSP [R]ename" })
 
 -- term/multiplexer integration
 local nav = {

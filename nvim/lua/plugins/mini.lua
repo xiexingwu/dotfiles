@@ -1,3 +1,47 @@
+local g_clues = {
+  { mode = 'n', keys = 'gf', desc = 'Go to [F]ile (Cursor)' },
+  { mode = 'n', keys = 'gi', desc = 'Go last [I]nsert' },
+  { mode = 'n', keys = 'gj', desc = "Screenline [J]",         postkeys = "g" },
+  { mode = 'n', keys = 'gk', desc = "Screenline [K]",         postkeys = "g" },
+  { mode = 'n', keys = 'gU', desc = "[U]ppercase" },
+  { mode = 'n', keys = 'gu', desc = "Lowercase" },
+  { mode = 'n', keys = 'gv', desc = "Last [V]isual" },
+  { mode = 'n', keys = 'gx', desc = 'E[X]ecute file (Cursor)' },
+  { mode = 'n', keys = 'g;', desc = "Change List (older)",    postkeys = "g" },
+  { mode = 'n', keys = 'g,', desc = "Change List (newer)",    postkeys = "g" },
+}
+
+local z_clues = {
+  { mode = 'n', keys = 'za', desc = 'Toggle fold' },
+  { mode = 'n', keys = 'zh', desc = "Screen Scroll [H]",             postkeys = "z" },
+  { mode = 'n', keys = 'zl', desc = "Screen Scroll [L]",             postkeys = "z" },
+  { mode = 'n', keys = 'zj', desc = 'Fold jump [J]',                 postkeys = "z" },
+  { mode = 'n', keys = 'zk', desc = 'Fold jump [K]',                 postkeys = "z" },
+  { mode = 'n', keys = 'zN', desc = "Fold [N]one (set foldenable)" },
+  { mode = 'n', keys = 'zn', desc = "Fold [N]one (reset foldenable)" },
+
+  { mode = 'x', keys = 'zf', desc = '[F]old selection' },
+}
+
+local win_clues = {
+  { mode = 'n', keys = '<C-W>+',  desc = 'Split height +',             postkeys = "<C-W>" },
+  { mode = 'n', keys = '<C-W>-',  desc = 'Split height -',             postkeys = "<C-W>" },
+  { mode = 'n', keys = '<C-W><',  desc = 'Split width -',              postkeys = "<C-W>" },
+  { mode = 'n', keys = '<C-W>>',  desc = 'Split width +',              postkeys = "<C-W>" },
+  { mode = 'n', keys = '<C-W>=',  desc = 'Balance windows' },
+  { mode = 'n', keys = '<C-w>_',  desc = 'Hide _ split (full height)' },
+  { mode = 'n', keys = '<C-w>|',  desc = 'Hide | split (full width)' },
+  { mode = 'n', keys = '<C-w>f',  desc = 'Split [F]ile' },
+  { mode = 'n', keys = '<C-w>d',  desc = 'Split [D]efinition' },
+  { mode = 'n', keys = '<C-w>o',  desc = 'Split [O]nly (close others)' },
+  { mode = 'n', keys = '<C-w>v',  desc = 'Split [V]ertical' },
+  { mode = 'n', keys = '<C-w>s',  desc = '[S]plit Horizontal' },
+
+  { mode = 'n', keys = '<C-w>g',  desc = '+Tab' },
+  { mode = 'n', keys = '<C-w>gf', desc = 'Tabedit [F]ile' },
+}
+
+
 return {
   'nvim-mini/mini.nvim',
   version = false,
@@ -71,6 +115,55 @@ return {
         find_left = "",
         highlight = "",
       }
+    })
+
+    -- clue
+    local miniclue = require('mini.clue')
+    miniclue.setup({
+      window = {
+        delay = 200,
+        config = { width = 50 }
+      },
+      triggers = {
+        -- Leader triggers
+        { mode = { 'n', 'x' }, keys = '<Leader>' },
+
+        -- `[` and `]` keys
+        { mode = 'n',          keys = '[' },
+        { mode = 'n',          keys = ']' },
+
+        -- `g` key
+        { mode = { 'n', 'x' }, keys = 'g' },
+
+        -- Marks
+        { mode = { 'n', 'x' }, keys = "'" },
+        { mode = { 'n', 'x' }, keys = '`' },
+
+        -- Registers
+        { mode = { 'n', 'x' }, keys = '"' },
+        { mode = { 'i', 'c' }, keys = '<C-r>' },
+
+        -- Window commands
+        { mode = 'n',          keys = '<C-w>' },
+
+        -- `z` key
+        { mode = { 'n', 'x' }, keys = 'z' },
+      },
+
+      clues = {
+        { mode = 'n', keys = '<Leader>b',  desc = "+Buffer" },
+        { mode = 'n', keys = '<Leader>g',  desc = "+Git" },
+        { mode = 'n', keys = '<Leader>h',  desc = "+Help" },
+        { mode = 'n', keys = '<Leader>m',  desc = "+Marks (Haunt)" },
+        { mode = 'n', keys = '<Leader>p',  desc = "+Picker" },
+        { mode = 'n', keys = '<Leader>s',  desc = "+Search" },
+        { mode = 'n', keys = '<Leader>t',  desc = "+Toggle" },
+        { mode = 'n', keys = '<Leader>z',  desc = "+ZK" },
+        miniclue.gen_clues.registers(),
+        z_clues,
+        g_clues,
+        win_clues,
+      },
     })
 
     -- cmdline
