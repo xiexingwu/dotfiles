@@ -8,8 +8,9 @@ keybinds clear-defaults=true {
 
   }
   shared {
-    bind "Ctrl Tab" {GoToNextTab;}
-    bind "Ctrl Shift Tab" {GoToPreviousTab;}
+    bind "ctrl `" {ToggleFloatingPanes; SwitchToMode "normal";}
+    bind "ctrl tab" "ctrl ]"{GoToNextTab;}
+    bind "ctrl shift tab" "ctrl ["{GoToPreviousTab;}
     bind "Super 1" {GoToTab 1;}
     bind "Super 2" {GoToTab 2;}
     bind "Super 3" {GoToTab 3;}
@@ -19,13 +20,15 @@ keybinds clear-defaults=true {
     bind "Super t" {NewTab;}
     bind "Super w" {CloseTab;}
     bind "Alt w" {CloseFocus;}
+
   }
 
   shared_except "locked" {
-    bind "Ctrl h" {MoveFocusOrTab "Left"; }
+    bind "Shift enter" { ToggleFocusFullscreen; }
+    bind "Ctrl h" {MoveFocus "Left"; }
     bind "Ctrl j" {MoveFocus "Down"; }
     bind "Ctrl k" {MoveFocus "Up"; }
-    bind "Ctrl l" {MoveFocusOrTab "Right"; }
+    bind "Ctrl l" {MoveFocus "Right"; }
   }
   shared_among "tab" "pane" "session" "scroll" {
     bind "esc" { SwitchToMode "normal"; }
@@ -38,22 +41,23 @@ keybinds clear-defaults=true {
     bind "Super d" {Detach;}
     // bind "ctrl q" {Quit;}
 
-    bind "ctrl s" {SwitchToMode "pane";} // [S]plit
+    bind "ctrl p" {SwitchToMode "pane";} // [S]plit
     bind "ctrl t" {SwitchToMode "tab";}
-    bind "ctrl /" { SwitchToMode "entersearch"; SearchInput 0; }
+    bind "ctrl /" {SwitchToMode "entersearch"; SearchInput 0;}
     bind "ctrl y" {SwitchToMode "scroll";} // Histor[y]
 
     // bind "ctrl ;" {SwitchToMode "session";}
     // bind "ctrl t" {SwitchToMode "tmux";}
 
-    bind "Ctrl p" {
-        LaunchOrFocusPlugin "file:~/.config/zellij/plugins/zellij-favs.wasm" {
-            floating true
-            ignore_case true
-            quick_jump true
-        }
-      SwitchToMode "normal"
-    }
+    bind "super k" {Clear;}
+    // bind "Ctrl p" {
+    //     LaunchOrFocusPlugin "file:~/.config/zellij/plugins/zellij-favs.wasm" {
+    //         floating true
+    //         ignore_case true
+    //         quick_jump true
+    //     }
+    //   SwitchToMode "normal"
+    // }
     bind "Ctrl shift p" {
       LaunchOrFocusPlugin "session-manager" {
         floating true
@@ -86,28 +90,26 @@ keybinds clear-defaults=true {
   }
 
   pane {
-
-    bind "h" { MoveFocus "left"; }
-    bind "j" { MoveFocus "down"; }
-    bind "k" { MoveFocus "up"; }
-    bind "l" { MoveFocus "right"; }
+    // bind "h" { MoveFocus "left"; }
+    // bind "j" { MoveFocus "down"; }
+    // bind "k" { MoveFocus "up"; }
+    // bind "l" { MoveFocus "right"; }
 
     bind "-" { Resize "Decrease"; }
     bind "=" { Resize "Increase"; }
 
-    bind "n" { NewPane; SwitchToMode "normal"; }
-    bind "v" { NewPane "right"; SwitchToMode "normal"; }
+    bind "n" "v" { NewPane "right"; SwitchToMode "normal"; }
     bind "s" { NewPane "down"; SwitchToMode "normal"; }
 
     bind "r" { SwitchToMode "renamepane"; PaneNameInput 0; }
 
-    bind "p" { TogglePanePinned;  }
+    bind "p" { TogglePanePinned;}
 
-    bind "shift f" { TogglePaneEmbedOrFloating;  }
-    bind "\\" { ToggleFloatingPanes;  }
+    bind "f" { TogglePaneEmbedOrFloating;}
+    bind "ctrl o" { ToggleFloatingPanes; }
+    bind "`" { ToggleFloatingPanes; SwitchToMode "normal";}
 
-    bind "Shift enter" { ToggleFocusFullscreen; SwitchToMode "normal"; }
-    bind "ctrl f" { TogglePaneFrames; SwitchToMode "normal"; }
+    // bind "ctrl f" { TogglePaneFrames; SwitchToMode "normal"; }
 
     bind "Shift r" {SwitchToMode "resize";}
     bind "Shift m" {SwitchToMode "move";}
@@ -130,11 +132,9 @@ keybinds clear-defaults=true {
     bind "right" {NextSwapLayout;}
     bind "left" {PreviousSwapLayout;}
   }
-  renametab {
-    bind "esc" { UndoRenameTab; SwitchToMode "tab"; }
-  }
-  renamepane {
-    bind "esc" { UndoRenamePane; SwitchToMode "pane"; }
+  shared_among "renametab" "renamepane" {
+    bind "esc" { UndoRenameTab; SwitchToMode "normal"; }
+    bind "enter" { SwitchToMode "normal"; }
   }
 
   // Resize & Move pane
@@ -216,8 +216,8 @@ plugins {
 
   autolock location="file:~/.config/zellij/plugins/zellij-autolock.wasm"{
     is_enabled true
-    triggers "nvim|vim"
-    reaction_seconds "0.2"
+    triggers "nvim|vim|fzf|git|zk"
+    reaction_seconds "0.5"
   }
 
   forgot location="file:~/.config/zellij/plugins/zellij_forgot.wasm"

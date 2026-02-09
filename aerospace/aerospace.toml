@@ -22,22 +22,22 @@ gaps.outer = { top = 3, bottom = 3, left = 3, right = 3 }
 
 # Float these apps by default
 [[on-window-detected]]
-if.app-name-regex-substring = '^(wechat|discord|messages)$'
-run = ['layout floating', 'move-node-to-workspace chat']
+if.app-name-regex-substring = '^(wechat|messages)$'
+run = 'layout floating'
 [[on-window-detected]]
-if.app-name-regex-substring = '^(notes|1password|finder|karabiner-elements|bazecor|calendar|activity monitor|hammerspoon|Preview|QuickTime Player|Docker)$'
+if.app-name-regex-substring = '^(notes|1password|finder|karabiner-elements|bazecor|calendar|activity monitor|hammerspoon|Preview|QuickTime Player|Docker|Proton Mail Bridge)$'
 run = 'layout floating'
 
-# Scratch terminal
-[[on-window-detected]]
-if.app-name-regex-substring = 'wezterm'
-if.window-title-regex-substring = '_scratch'
-run = 'layout floating'
-
-# Slack
+# Assign default workspaces
 [[on-window-detected]]
 if.app-name-regex-substring = '^(slack)$'
 run = ['move-node-to-workspace work2']
+[[on-window-detected]]
+if.app-name-regex-substring = '^(wechat|discord|messages|thunderbird)$'
+run = ['move-node-to-workspace chat']
+[[on-window-detected]]
+if.app-name-regex-substring = '^(arc|ghostty)$'
+run = ['move-node-to-workspace personal']
 
 # forced workspace assignment
 [workspace-to-monitor-force-assignment]
@@ -55,7 +55,7 @@ ctrl-alt-semicolon = 'mode workspace'
 ## focus
 # alt-tab = 'focus-back-and-forth'
 ### Window
-cmd-tab = 'focus-back-and-forth'
+# cmd-tab = 'focus-back-and-forth'
 alt-h = 'focus left --ignore-floating --boundaries all-monitors-outer-frame --boundaries-action stop'
 alt-j = 'focus down --ignore-floating --boundaries all-monitors-outer-frame --boundaries-action stop'
 alt-k = 'focus up --ignore-floating --boundaries all-monitors-outer-frame --boundaries-action stop'
