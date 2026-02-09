@@ -41,6 +41,7 @@ vim.keymap.set("n", "Q", "<nop>") -- use @@
 vim.keymap.set("n", "<leader>;", "q:", { desc = "Cmdline window" })
 vim.keymap.set("n", "q:", "<nop>")
 vim.keymap.set("n", "\\", "<C-^>", { desc = "Alternate file" })
+vim.keymap.set('n', 'g%', "<nop>")
 
 vim.keymap.set("n", "<leader>tw", "<cmd>set wrap!<CR>", { desc = "[T]oggle [W]rap" })
 
@@ -48,6 +49,7 @@ vim.keymap.set("n", "<leader>tw", "<cmd>set wrap!<CR>", { desc = "[T]oggle [W]ra
 vim.keymap.set("n", "<leader>R", "<cmd>source" .. vim.api.nvim_eval("$MYVIMRC") .. "<CR>", { desc = "[R]eload config" })
 
 -- LSP See Snacks.picker for picker-related LSP functions
+vim.keymap.set('n', 'gO', '<nop>')
 vim.keymap.set('n', '<space>ld', vim.diagnostic.open_float, { desc = "LSP [D]iagnostic (Popup)" })
 vim.keymap.set("n", "<space>ll", vim.diagnostic.setloclist, { desc = "LSP diagnostic [L]oclist" })
 vim.keymap.set("n", "<leader>lr", vim.lsp.buf.rename, { desc = "LSP [R]ename" })

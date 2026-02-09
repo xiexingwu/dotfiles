@@ -49,8 +49,16 @@ return {
       presets = {
         -- words = true,
         -- search = true, -- s, f, F, t, T, ;, ,, gs
-        -- delete = true,       -- d, dt, dT, rdw, rdl
-        -- yank = true,        -- y, yt, yT, ryw, ryl
+        delete = {
+          d = false,
+          dt = false,
+          dT = false,
+        },
+        yank = {
+          y = false,
+          yt = false,
+          yT = false,
+        },
         -- change = true,      -- c, ct, cT
         -- paste = true,       -- p, P
         -- treesitter = true,  -- ]], [[, ]c, [c, ]b, [b, daa, caa, yaa, dfn, cfn, yfn, saa
@@ -58,10 +66,64 @@ return {
         -- git = true,         -- ]g, [g
         -- quickfix = true,    -- ]q, [q, ]l, [l
         -- marks = true,       -- g', gm
-        -- misc = true,        -- . g. g0 g1-g9 gp gP gA-gZ gmd gmy (repeat, history, pins, global pins)
+        misc = {
+          ['g.'] = false,
+          g0 = false,
+          -- g1 = false,
+          -- g2 = false,
+          -- g3 = false,
+          g4 = false,
+          g5 = false,
+          g6 = false,
+          g7 = false,
+          g8 = false,
+          g9 = false,
+
+          -- gA = false,
+          -- gB = false,
+          -- gC = false,
+          gD = false,
+          gE = false,
+          gF = false,
+          gG = false,
+          gH = false,
+          gI = false,
+          gJ = false,
+          gK = false,
+          gL = false,
+          gM = false,
+          gN = false,
+          gO = false,
+          gP = false,
+          gQ = false,
+          gR = false,
+          gS = false,
+          gT = false,
+          gU = false, -- Upper case
+          gV = false,
+          gW = false,
+          gX = false,
+          gY = false,
+          gZ = false,
+
+          gp = false,
+
+          gTd = false,
+          gTe = false,
+          gTf = false,
+          gTg = false,
+          gQd = false,
+          gQe = false,
+          gQf = false,
+          gQg = false,
+
+          gmd = false,
+          gmy = false,
+        },
       },
     },
   },
+
 
   -- CLI integrations
   {

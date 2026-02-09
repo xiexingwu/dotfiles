@@ -1,4 +1,5 @@
 local g_clues = {
+  { mode = 'n', keys = 'gc', desc = '+[C]omment' },
   { mode = 'n', keys = 'gf', desc = 'Go to [F]ile (Cursor)' },
   { mode = 'n', keys = 'gi', desc = 'Go last [I]nsert' },
   { mode = 'n', keys = 'gj', desc = "Screenline [J]",         postkeys = "g" },
@@ -9,6 +10,9 @@ local g_clues = {
   { mode = 'n', keys = 'gx', desc = 'E[X]ecute file (Cursor)' },
   { mode = 'n', keys = 'g;', desc = "Change List (older)",    postkeys = "g" },
   { mode = 'n', keys = 'g,', desc = "Change List (newer)",    postkeys = "g" },
+
+  { mode = 'n', keys = 'gp', desc = "+Set [P]in (Smart Motion)" },
+  { mode = 'n', keys = 'gP', desc = "+Set [P]in Global (Smart Motion)" },
 }
 
 local z_clues = {
@@ -125,29 +129,14 @@ return {
         config = { width = 50 }
       },
       triggers = {
-        -- Leader triggers
         { mode = { 'n', 'x' }, keys = '<Leader>' },
 
-        -- `[` and `]` keys
-        { mode = 'n',          keys = '[' },
-        { mode = 'n',          keys = ']' },
-
-        -- `g` key
-        { mode = { 'n', 'x' }, keys = 'g' },
-
-        -- Marks
-        { mode = { 'n', 'x' }, keys = "'" },
-        { mode = { 'n', 'x' }, keys = '`' },
-
-        -- Registers
         { mode = { 'n', 'x' }, keys = '"' },
         { mode = { 'i', 'c' }, keys = '<C-r>' },
-
-        -- Window commands
-        { mode = 'n',          keys = '<C-w>' },
-
-        -- `z` key
+        { mode = { 'n', 'x' }, keys = 'g' },
         { mode = { 'n', 'x' }, keys = 'z' },
+
+        { mode = 'n',          keys = '<C-w>' },
       },
 
       clues = {
@@ -159,9 +148,11 @@ return {
         { mode = 'n', keys = '<Leader>s',  desc = "+Search" },
         { mode = 'n', keys = '<Leader>t',  desc = "+Toggle" },
         { mode = 'n', keys = '<Leader>z',  desc = "+ZK" },
+
         miniclue.gen_clues.registers(),
-        z_clues,
         g_clues,
+        z_clues,
+
         win_clues,
       },
     })

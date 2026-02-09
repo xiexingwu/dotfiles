@@ -54,12 +54,12 @@ return {
     { "<leader>gf",       function() Snacks.picker.git_log_file() end,                                                 desc = "[G]it Log ([F]ile)" },
 
     -- Search
-    { "<leader>sn",       function() Snacks.picker.lines() end,                                                        desc = "[S]earch lines [\\N]" },
+    { "<leader>sl",       function() Snacks.picker.lines() end,                                                        desc = "[S]earch lines [\\N]" },
     -- { "<leader>sw",       function() Snacks.picker.grep_word() end,                                                    desc = "[S]earch [W]ord (or visual)",    mode = { "n", "x" } },
     { '<leader>s/',       function() Snacks.picker.search_history() end,                                               desc = "[S]earch Search History" },
     { "<leader>sd",       function() Snacks.picker.diagnostics_buffer() end,                                           desc = "[S]earch [D]iagnostics (Buffer)" },
     { "<leader>sD",       function() Snacks.picker.diagnostics() end,                                                  desc = "[S]earch [D]iagnostics (All)" },
-    { "<leader>sl",       function() Snacks.picker.loclist() end,                                                      desc = "Location List" },
+    { "<leader>sL",       function() Snacks.picker.loclist() end,                                                      desc = "[L]ocation List" },
     -- { "<leader>sp", function() Snacks.picker.lazy() end, desc = "Search for Plugin Spec" },
     { "<leader>sq",       function() Snacks.picker.qflist() end,                                                       desc = "Quickfix List" },
     { "<leader>si",       function() Snacks.picker.icons() end,                                                        desc = "Icons" },
@@ -74,7 +74,7 @@ return {
     { "<leader>hC",       function() Snacks.picker.colorschemes() end,                                                 desc = "[H]elp [C]olorschemes" },
 
     -- LSP
-    { "gd",               function() Snacks.picker.lsp_definitions() end,                                              desc = "[G]oto [D]efinition" },
+    { "gd",               function() Snacks.picker.lsp_definitions() end,                                              desc = "Goto [D]efinition" },
     { "<C-W>gd",          function() vim.cmd(":tab split | lua vim.lsp.buf.definition()") end,                         desc = "Tabedit [D]efiniion" },
     { "gr",               function() Snacks.picker.lsp_references() end,                                               nowait = true,                           desc = "[G]oto [R]eferences" },
     -- { "gI",               function() Snacks.picker.lsp_implementations() end,                                          desc = "[G]oto [I]mplementation" },
