@@ -24,7 +24,7 @@ return {
 
   keys = {
     -- Common Pickers
-    { "<C-p>",            function() Snacks.picker.smart() end,                                                        desc = "Picker: Smart" },
+    -- { "<C-p>",            function() Snacks.picker.smart() end,                                                        desc = "Picker: Smart" },
     { "<leader><leader>", function() Snacks.picker.resume() end,                                                       desc = "Picker: Resume" },
     { "<leader>,",        function() Snacks.picker.buffers() end,                                                      desc = "Picker: Buffers" },
     { "<leader>/",        function() Snacks.picker.grep() end,                                                         desc = "Picker: Search" },

@@ -3,6 +3,8 @@ vim.opt.relativenumber = false
 vim.opt.title = true
 vim.opt.showmode = false
 
+vim.o.mouse = ""
+
 vim.g.markdown_recommended_style = 0
 vim.opt.tabstop = 2
 vim.opt.softtabstop = 2

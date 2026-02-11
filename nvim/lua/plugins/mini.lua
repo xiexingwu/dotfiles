@@ -114,6 +114,7 @@ return {
 
     -- Surround
     require("mini.surround").setup({
+      n_lines = 100,
       mappings = {
         find = "",
         find_left = "",

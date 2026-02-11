@@ -143,9 +143,9 @@ return {
         end
       end)
 
-      -- -- Jumplist support (disabled until needed)
-      -- set({ "v", "n" }, "<c-i>", mc.jumpForward)
-      -- set({ "v", "n" }, "<c-o>", mc.jumpBackward)
+      -- Jumplist support (disabled until needed)
+      set({ "v", "n" }, "<c-i>", mc.jumpForward)
+      set({ "v", "n" }, "<c-o>", mc.jumpBackward)
 
       -- Customize how cursors look.
       local hl = vim.api.nvim_set_hl
