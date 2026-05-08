@@ -1,7 +1,7 @@
 function l(){
     eza -l --group-directories-first -h --git $*
 }
-alias ll=l
+alias ll=l -a
 function la(){
     l -a $*
 }
@@ -12,6 +12,9 @@ function lf(){
     l -f $*
 }
 
+# images
+alias icat="viu"
+
 # git
 function git-prune-branches(){
     git fetch -p && git branch -vv | awk '/: gone]/{print $1}' | xargs git branch -D
@@ -19,17 +22,23 @@ function git-prune-branches(){
 alias g="git"
 alias gw="git worktree"
 
+alias lg="lazygit"
 # yazi
 alias y="yazi"
 # neovim
 alias v="nvim"
-function s(){
-  mkdir -p $HOME/scratch
-  # _SCRATCH=scratch-$(date "+%Y-%m-%d-%H-%M-%S").md
-  _SCRATCH=scratch-$(date "+%Y-%m-%d").md
-  touch $HOME/scratch/$_SCRATCH
-  nvim "+cd $HOME/scratch" $HOME/scratch/$_SCRATCH
-}
+# zellij
+alias zj="zellij"
+# zk
+alias s="zk daily"
+# function s(){
+#   zk daily
+#   # mkdir -p $HOME/scratch
+#   # # _SCRATCH=scratch-$(date "+%Y-%m-%d-%H-%M-%S").md
+#   # _SCRATCH=scratch-$(date "+%Y-%m-%d").md
+#   # touch $HOME/scratch/$_SCRATCH
+#   # nvim "+cd $HOME/scratch" $HOME/scratch/$_SCRATCH
+# }
 function todo(){
   touch $HOME/todo.md
   nvim $HOME/todo.md
@@ -38,19 +47,19 @@ function todo(){
 alias ai="aichat"
 
 # wezterm
-function wez_focus_or_spawn_workspace() {
-  readonly workspace=${1:?"Specify the workspace name"}
-  pid=$(wezterm cli list-clients --format json | jq -c '.[] | select(.workspace == "'$workspace'") | .pid')
-  if [[ -n "$pid" ]]; then
-    echo "aerospace list-windows --monitor all --pid $pid --format %{window-id} | head -n 1" >> ~/tmp/log
-    wid=$(aerospace list-windows --monitor all --pid $pid --format %{window-id} | head -n 1)
-    echo aerospace focus --window-id $wid >> ~/tmp/log
-    aerospace focus --window-id $wid
-  else
-    echo wezterm cli spawn --new-window --workspace "$workspace" >> ~/tmp/log
-    wezterm cli spawn --new-window --workspace "$workspace"
-  fi
-}
+# function wez_focus_or_spawn_workspace() {
+#   readonly workspace=${1:?"Specify the workspace name"}
+#   pid=$(wezterm cli list-clients --format json | jq -c '.[] | select(.workspace == "'$workspace'") | .pid')
+#   if [[ -n "$pid" ]]; then
+#     echo "aerospace list-windows --monitor all --pid $pid --format %{window-id} | head -n 1" >> ~/tmp/log
+#     wid=$(aerospace list-windows --monitor all --pid $pid --format %{window-id} | head -n 1)
+#     echo aerospace focus --window-id $wid >> ~/tmp/log
+#     aerospace focus --window-id $wid
+#   else
+#     echo wezterm cli spawn --new-window --workspace "$workspace" >> ~/tmp/log
+#     wezterm cli spawn --new-window --workspace "$workspace"
+#   fi
+# }
 
 # zellij
 function zr () { zellij run --name "$*" -- zsh -ic "$*";}
