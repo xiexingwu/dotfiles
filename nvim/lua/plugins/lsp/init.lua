@@ -1,7 +1,7 @@
 function csharp()
   vim.lsp.enable('omnisharp')
   require 'lspconfig'.omnisharp.setup {
-    cmd = { "dotnet", "/usr/local/bin/omnisharp/OmniSharp.dll" },
+    cmd = { 'dotnet', '/usr/local/bin/omnisharp/OmniSharp.dll' },
 
     settings = {
       FormattingOptions = {
@@ -97,7 +97,7 @@ function lua()
 end
 
 function python()
-  vim.lsp.enable("pyright")
+  vim.lsp.enable('pyright')
 end
 
 function rust()
@@ -118,25 +118,35 @@ function ts()
 end
 
 function zig()
-  vim.lsp.enable("zls")
+  vim.lsp.config('zls', {
+    cmd = { '/Users/xiexingwu/.zvm/bin/zls' },
+    filetypes = { 'zig' },
+    root_markers = { 'build.zig' },
+    settings = {
+      zls = {
+        zig_exe_path = '/Users/xiexingwu/.zvm/bin/zig',
+      },
+    },
+  })
+  vim.lsp.enable('zls')
 end
 
 return {
   'neovim/nvim-lspconfig',
   config = function()
-    -- local lspconfig = require("lspconfig")
+    -- local lspconfig = require('lspconfig')
 
-    vim.lsp.enable("bashls")
+    vim.lsp.enable('bashls')
     -- Csharp
     -- csharp()
 
     lua()
 
-    -- Markdown
-    vim.lsp.enable('marksman')
+    -- -- Markdown
+    -- vim.lsp.enable('marksman')
 
     -- Marko
-    vim.lsp.enable("marko-js")
+    vim.lsp.enable('marko-js')
 
     python()
     rust()

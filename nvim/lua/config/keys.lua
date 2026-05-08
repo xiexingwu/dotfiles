@@ -30,7 +30,7 @@ vim.keymap.set("n", "<C-W>gt", "<C-W>T", { desc = "Split -> [T]ab" })
 vim.keymap.del("n", "<C-W><C-D>");
 
 -- Terminal
-vim.keymap.set("t", "<C-\\><C-\\>", "<C-\\><C-N>", {desc = "Terminal Escape"})
+vim.keymap.set("t", "<C-\\><C-\\>", "<C-\\><C-N>", { desc = "Terminal Escape" })
 
 -- Folds
 vim.keymap.set("n", "zo", "zO", { desc = "Fold [O]pen (recursive)" })
@@ -42,6 +42,8 @@ vim.keymap.set("n", "<leader>;", "q:", { desc = "Cmdline window" })
 vim.keymap.set("n", "q:", "<nop>")
 vim.keymap.set("n", "\\", "<C-^>", { desc = "Alternate file" })
 vim.keymap.set('n', 'g%', "<nop>")
+vim.keymap.set('n', 'g%', "<nop>")
+vim.keymap.set('n', '<C-F>', "<nop>")
 
 vim.keymap.set("n", "<leader>tw", "<cmd>set wrap!<CR>", { desc = "[T]oggle [W]rap" })
 

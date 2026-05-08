@@ -138,6 +138,8 @@ return {
         { mode = { 'n', 'x' }, keys = 'z' },
 
         { mode = 'n',          keys = '<C-w>' },
+
+        { mode = 'n',          keys = '<C-f>' },
       },
 
       clues = {

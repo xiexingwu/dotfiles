@@ -151,6 +151,9 @@
           "vendorID" : "0x46d"
         }
       },
+      "pointer" : {
+        "speed" : 0.1112
+      },
       "scrolling" : {
         "reverse" : {
           "vertical" : true
@@ -189,6 +192,25 @@
             }
           }
         },
+        "reverse" : {
+          "vertical" : true
+        }
+      }
+    },
+    {
+      "if" : {
+        "device" : {
+          "category" : "mouse",
+          "productID" : "0xc088",
+          "productName" : "G Pro Wireless Gaming Mouse",
+          "serialNumber" : "187ECFEDADEC36EE",
+          "vendorID" : "0x46d"
+        }
+      },
+      "pointer" : {
+        "speed" : 0.1157
+      },
+      "scrolling" : {
         "reverse" : {
           "vertical" : true
         }
