@@ -1,5 +1,5 @@
 #!/bin/bash
 cd home
 for file in $(ls -A); do
- cp -vaf $file $HOME/$file
+  cp -vaf $file $HOME/
 done
