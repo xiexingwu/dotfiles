@@ -15,12 +15,16 @@
   vi-c (multi ctl (layer-while-held vi-c))
   vi-S (release-key sft)
   vi-C (release-key ctl)
+  met (multi met (layer-while-held met))
+  rmet (multi rmet (layer-while-held met))
 )
 
 (deflayermap (base)
   caps @cap
   fn (layer-while-held vi)
   rsft (layer-while-held vi)
+  lmet @met
+  rmet @rmet
   ;; rmet (layer-switch vi)
 )
 
@@ -86,5 +90,12 @@
   i (multi @vi-S M-left)
   a (multi @vi-S M-right)
   esc (multi @vi-S lrld)
+  _ _
+)
+
+;; enter via @met: kill macOS Cmd-H (Hide) everywhere. Sends a bare F19 instead,
+;; which ghostty turns back into Super h for zellij pane focus.
+(deflayermap (met)
+  h (unmod f19)
   _ _
 )
