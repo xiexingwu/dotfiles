@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__codegraph__*"
+    ]
+  },
+  "model": "opus",
+  "enabledPlugins": {
+    "superpowers@claude-plugins-official": true
+  },
+  "extraKnownMarketplaces": {},
+  "autoCompactWindow": 200000,
+  "awaySummaryEnabled": false,
+  "skipWorkflowUsageWarning": true,
+  "theme": "auto",
+  "editorMode": "normal",
+  "preferredNotifChannel": "ghostty"
+}

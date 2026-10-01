@@ -1,4 +1,7 @@
 #!/bin/bash
+# Copy $HOME versions of the files tracked under home/ into the repo.
+# Only tracked files are synced, so partial dirs (e.g. ~/.claude) work.
+# To add a new file: copy it into home/ once and `git add` it.
 if [[ -n $(git status --short -uno) ]]; then
   echo "================================================================================="
   echo "  Repo diff is not clean."
@@ -7,6 +10,11 @@ if [[ -n $(git status --short -uno) ]]; then
   exit 1
 fi
 
-for file in $(ls -A ./home); do
-  cp -vr $HOME/$file ./home
+git ls-files home | while read -r f; do
+  rel=${f#home/}
+  if [[ -e "$HOME/$rel" ]]; then
+    cp -v "$HOME/$rel" "$f"
+  else
+    echo "missing in \$HOME: $rel"
+  fi
 done
