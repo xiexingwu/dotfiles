@@ -25,7 +25,10 @@ gaps.outer = { top = 3, bottom = 3, left = 3, right = 3 }
 if.app-name-regex-substring = '^(wechat|messages)$'
 run = 'layout floating'
 [[on-window-detected]]
-if.app-name-regex-substring = '^(notes|1password|finder|karabiner-elements|bazecor|calendar|activity monitor|hammerspoon|Preview|QuickTime Player|Docker|Proton Mail Bridge)$'
+if.app-name-regex-substring = '^(notes|1password|finder|karabiner-elements|bazecor|calendar|activity monitor|QuickTime Player|Docker|Proton Mail Bridge)$'
+run = 'layout floating'
+[[on-window-detected]]
+if.app-name-regex-substring = '^(steam|factorio)$'
 run = 'layout floating'
 
 # Assign default workspaces
@@ -137,4 +140,3 @@ r = ['flatten-workspace-tree', 'mode main']
 esc = 'mode main'
 r = ['reload-config', 'mode main']
 t = ['enable toggle', 'mode main']
-
