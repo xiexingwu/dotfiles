@@ -56,8 +56,9 @@
   y M-c
   p M-v
 
-  u M-z
-  ;; see (vi-c) for C-r
+  ;; non-standard
+  u pgup
+  d pgdn
 
   ;; Fn-keys
   f1 brdown
