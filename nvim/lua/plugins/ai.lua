@@ -1,3 +1,11 @@
+local opencode_cmd = 'opencode --port'
+local snacks_terminal_opts = {
+  win = {
+    position = 'right',
+    enter = false,
+  },
+}
+
 return {
   "nickjvandyke/opencode.nvim",
   version = "*", -- Latest stable release.
@@ -42,8 +50,11 @@ return {
       { desc = "OpenCode: [A]sk" })
     vim.keymap.set({ "n", "x" }, "<leader>os", function() require("opencode").select() end,
       { desc = "OpenCode: [S]elect" })
-    vim.keymap.set({ "n", "t" }, "<leader>oo", function() require("opencode").toggle() end,
-      { desc = "OpenCode: [O]pen/Close" })
+
+    -- Avoid <leader> here — Neovim watches for keymaps in terminal mode, so your leader key will have input delay.
+    vim.keymap.set({ 'n', 't' }, '<C-.>', function()
+      require('snacks.terminal').toggle(opencode_cmd, snacks_terminal_opts)
+    end, { desc = 'Toggle opencode' })
 
     vim.keymap.set({ "n", "x" }, "<leader>ov", function() return require("opencode").operator("@this ") end,
       { desc = "OpenCode: Add [V]isual", expr = true })

@@ -24,7 +24,7 @@ return {
 
   keys = {
     -- Common Pickers
-    -- { "<C-p>",            function() Snacks.picker.smart() end,                                                        desc = "Picker: Smart" },
+    { "<C-p>",            function() Snacks.picker.smart() end,                                                        desc = "Picker: Smart" },
     { "<leader><leader>", function() Snacks.picker.resume() end,                                                       desc = "Picker: Resume" },
     { "<leader>,",        function() Snacks.picker.buffers() end,                                                      desc = "Picker: Buffers" },
     { "<leader>/",        function() Snacks.picker.grep() end,                                                         desc = "Picker: Search" },
@@ -85,7 +85,7 @@ return {
     -- Other
     { "<C-B>",            function() Snacks.bufdelete() end,                                                           desc = "Delete Buffer" },
     -- { "<leader>rf",       function() Snacks.rename.rename_file() end,                                                  desc = "[R]ename [F]ile" },
-    { "<c-/>",            function() Snacks.terminal() end,                                                            mode = { "n", "t" },                     desc = "Toggle Terminal" },
+    -- { "<c-/>",            function() Snacks.terminal() end,                                                            mode = { "n", "t" },                     desc = "Toggle Terminal" },
 
     -- { "]]",               function() Snacks.words.jump(vim.v.count1) end,                                              desc = "Next Reference",                 mode = { "n", "t" } },
     -- { "[[",               function() Snacks.words.jump(-vim.v.count1) end,                                             desc = "Prev Reference",                 mode = { "n", "t" } },

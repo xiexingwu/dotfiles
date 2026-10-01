@@ -96,5 +96,5 @@ end
 
 -- Move to window using the movement keys
 for key, dir in pairs(nav) do
-  vim.keymap.set("n", "<C-" .. key .. ">", navigate(key), { desc = "smart-split: " .. dir })
+  vim.keymap.set({"n", "x", "t"}, "<C-" .. key .. ">", navigate(key), { desc = "smart-split: " .. dir })
 end

@@ -44,6 +44,16 @@ function csharp()
   }
 end
 
+function kotlin()
+  vim.lsp.config('kotlin_lsp', {
+    cmd = { "kotlin-lsp", "--stdio" },
+    single_file_support = true,
+    filetypes = { "kotlin" },
+    root_markers = { "build.gradle", "build.gradle.kts", "pom.xml" },
+  })
+  vim.lsp.enable('kotlin_lsp')
+end
+
 function lua()
   vim.lsp.config('lua_ls', {
     on_init = function(client)
@@ -97,7 +107,7 @@ function lua()
 end
 
 function python()
-  vim.lsp.enable('pyright')
+  vim.lsp.enable('basedpyright')
 end
 
 function rust()
@@ -113,8 +123,16 @@ function rust()
   vim.lsp.enable('rust_analyzer')
 end
 
+function swift()
+  vim.lsp.enable('sourcekit')
+end
+
 function ts()
-  vim.lsp.enable('ts_ls')
+  -- TypeScript 7 (brew `typescript`) dropped tsserver, which ts_ls needs; use its native LSP instead
+  vim.lsp.config('tsgo', {
+    cmd = { 'tsc', '--lsp', '--stdio' },
+  })
+  vim.lsp.enable('tsgo')
 end
 
 function zig()
@@ -140,6 +158,7 @@ return {
     -- Csharp
     -- csharp()
 
+    kotlin()
     lua()
 
     -- -- Markdown
@@ -150,6 +169,7 @@ return {
 
     python()
     rust()
+    swift()
     ts()
     zig()
   end
