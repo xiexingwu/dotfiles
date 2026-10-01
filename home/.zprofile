@@ -1,8 +1,8 @@
 eval "$(/opt/homebrew/bin/brew shellenv zsh)"
 
-export ZDIR="$HOME/.zdir"
+export PATH="$HOME/.local/bin:$PATH"
 
-export NVM_DIR="$HOME/.nvm"
+export ZDIR="$HOME/.zdir"
 
 # ZVM
 export ZVM_INSTALL="$HOME/.zvm/self"
