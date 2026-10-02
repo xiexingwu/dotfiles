@@ -1,7 +1,15 @@
 # This is Git's per-user configuration file.
 [user]
 	name = Michael Xie
-	email = xie.michael.x@gmail.com
+	email = michael@fullstackdata.dev
+
+# Work repos (rome2rio org, or cloned via the github-r2r ssh alias) use the work identity.
+[includeIf "hasconfig:remote.*.url:github-r2r:*/**"]
+	path = ~/.gitconfig-r2r
+[includeIf "hasconfig:remote.*.url:git@github.com:rome2rio/**"]
+	path = ~/.gitconfig-r2r
+[includeIf "hasconfig:remote.*.url:https://github.com/rome2rio/**"]
+	path = ~/.gitconfig-r2r
 [core]
 	excludesfile = /Users/xiexingwu/.ignore
   pager = delta
