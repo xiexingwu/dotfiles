@@ -1,5 +1,12 @@
 local g_clues = {
   { mode = 'n', keys = 'gc', desc = '+[C]omment' },
+  -- LSP: built-in grn/gra/gO plus snacks pickers (snacks/init.lua)
+  { mode = 'n', keys = 'gr', desc = '+LSP' },
+  { mode = 'n', keys = 'grn', desc = 'Re[N]ame' },
+  { mode = 'n', keys = 'gra', desc = 'Code [A]ction' },
+  { mode = 'x', keys = 'gra', desc = 'Code [A]ction' },
+  { mode = 'n', keys = 'gq', desc = 'Format (conform)' },
+  { mode = 'n', keys = 'gw', desc = 'Wrap text' },
   { mode = 'n', keys = 'gf', desc = 'Go to [F]ile (Cursor)' },
   { mode = 'n', keys = 'gi', desc = 'Go last [I]nsert' },
   { mode = 'n', keys = 'gj', desc = "Screenline [J]",         postkeys = "g" },
@@ -10,9 +17,6 @@ local g_clues = {
   { mode = 'n', keys = 'gx', desc = 'E[X]ecute file (Cursor)' },
   { mode = 'n', keys = 'g;', desc = "Change List (older)",    postkeys = "g" },
   { mode = 'n', keys = 'g,', desc = "Change List (newer)",    postkeys = "g" },
-
-  { mode = 'n', keys = 'gp', desc = "+Set [P]in (Smart Motion)" },
-  { mode = 'n', keys = 'gP', desc = "+Set [P]in Global (Smart Motion)" },
 }
 
 local z_clues = {
@@ -144,13 +148,20 @@ return {
 
       clues = {
         { mode = 'n', keys = '<Leader>b',  desc = "+Buffer" },
+        { mode = { 'n', 'x' }, keys = '<Leader>d',  desc = "+Diff" },
+        { mode = { 'n', 'x' }, keys = '<Leader>D',  desc = "+Debug" },
+        -- stepping submode: keep tapping c/n/i/o/r, <Esc> to leave
+        { mode = 'n', keys = '<Leader>Dc', postkeys = '<Leader>D' },
+        { mode = 'n', keys = '<Leader>Dn', postkeys = '<Leader>D' },
+        { mode = 'n', keys = '<Leader>Di', postkeys = '<Leader>D' },
+        { mode = 'n', keys = '<Leader>Do', postkeys = '<Leader>D' },
+        { mode = 'n', keys = '<Leader>Dr', postkeys = '<Leader>D' },
         { mode = 'n', keys = '<Leader>g',  desc = "+Git" },
         { mode = 'n', keys = '<Leader>h',  desc = "+Help" },
-        { mode = 'n', keys = '<Leader>m',  desc = "+Marks (Haunt)" },
+        { mode = 'n', keys = '<Leader>m',  desc = "+Markdown" },
         { mode = 'n', keys = '<Leader>p',  desc = "+Picker" },
         { mode = 'n', keys = '<Leader>s',  desc = "+Search" },
         { mode = 'n', keys = '<Leader>t',  desc = "+Toggle" },
-        { mode = 'n', keys = '<Leader>z',  desc = "+ZK" },
 
         miniclue.gen_clues.registers(),
         g_clues,
@@ -158,6 +169,15 @@ return {
 
         win_clues,
       },
+    })
+
+    -- mini.clue skips unlisted buffers; codediff panels are unlisted scratch buffers
+    vim.api.nvim_create_autocmd("FileType", {
+      pattern = { "codediff-explorer", "codediff-history" },
+      callback = vim.schedule_wrap(function(ev)
+        if vim.api.nvim_buf_is_valid(ev.buf) then MiniClue.ensure_buf_triggers(ev.buf) end
+      end),
+      desc = "Enable mini.clue triggers in codediff panels",
     })
 
     -- cmdline
@@ -172,6 +192,7 @@ return {
 
     -- Icons
     require("mini.icons").setup()
+    MiniIcons.mock_nvim_web_devicons() -- for plugins that require nvim-web-devicons (trouble)
 
     -- lualine
     require("mini.statusline").setup({

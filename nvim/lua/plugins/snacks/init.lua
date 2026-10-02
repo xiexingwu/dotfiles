@@ -1,8 +1,5 @@
-local currentDir = debug.getinfo(1).source:match("@?(.*/)") or ""
-package.path = package.path .. ";" .. currentDir .. "?.lua"
-local picker_config = require("picker")
-local image_config = require("image")
-local dashboard_config = require("dashboard")
+local picker_config = require("plugins.snacks.picker")
+local dashboard_config = require("plugins.snacks.dashboard")
 
 return {
   "folke/snacks.nvim",
@@ -14,7 +11,6 @@ return {
     bigfile = { enabled = true },
     dashboard = dashboard_config,
     explorer = { enabled = true },
-    -- image = image_config,
     indent = { enabled = true },
     input = { enabled = true },
     notifier = { enabled = true },
@@ -38,6 +34,7 @@ return {
 
     -- Pick
     { "<leader>pb",       function() Snacks.picker.buffers() end,                                                      desc = "[P]ick [B]uffers" },
+    { "<leader>pd",       function() Snacks.picker.git_diff() end,                                                     desc = "[P]ick [D]iff Hunks" },
     { "<leader>pf",       function() Snacks.picker.files() end,                                                        desc = "[P]ick [F]iles" },
     { "<leader>pg",       function() Snacks.picker.git_files() end,                                                    desc = "[P]ick [G]it Files" },
     { "<leader>pp",       function() Snacks.picker.projects({ recent = false, dev = { "~/src/", "~/src/ddr/" } }) end, desc = "[P] [P]rojects" },
@@ -45,13 +42,12 @@ return {
     -- { "<leader>pc", function() Snacks.picker.files({ cwd = vim.fn.stdpath("config") }) end, desc = "Find Config File" },
 
     -- Git
-    { "<leader>gB",       function() Snacks.picker.git_branches() end,                                                 desc = "[G]it [B]ranches" },
-    { "<leader>gl",       function() Snacks.picker.git_log() end,                                                      desc = "[G]it [L]og" },
-    { "<leader>gL",       function() Snacks.picker.git_log_line() end,                                                 desc = "[G]it Log ([L]ine)" },
-    { "<leader>gs",       function() Snacks.picker.git_status() end,                                                   desc = "[G]it [S]tatus" },
-    { "<leader>gS",       function() Snacks.picker.git_stash() end,                                                    desc = "[G]it [S]tash" },
-    { "<leader>gd",       function() Snacks.picker.git_diff() end,                                                     desc = "[G]it [D]iff (Hunks)" },
-    { "<leader>gf",       function() Snacks.picker.git_log_file() end,                                                 desc = "[G]it Log ([F]ile)" },
+    -- { "<leader>gB",       function() Snacks.picker.git_branches() end,                                                 desc = "[G]it [B]ranches" },
+    -- { "<leader>gl",       function() Snacks.picker.git_log() end,                                                      desc = "[G]it [L]og" },
+    -- { "<leader>gL",       function() Snacks.picker.git_log_line() end,                                                 desc = "[G]it Log ([L]ine)" },
+    -- { "<leader>gs",       function() Snacks.picker.git_status() end,                                                   desc = "[G]it [S]tatus" },
+    -- { "<leader>gS",       function() Snacks.picker.git_stash() end,                                                    desc = "[G]it [S]tash" },
+    -- { "<leader>gf",       function() Snacks.picker.git_log_file() end,                                                 desc = "[G]it Log ([F]ile)" },
 
     -- Search
     { "<leader>sl",       function() Snacks.picker.lines() end,                                                        desc = "[S]earch lines [\\N]" },
@@ -75,12 +71,12 @@ return {
 
     -- LSP
     { "gd",               function() Snacks.picker.lsp_definitions() end,                                              desc = "Goto [D]efinition" },
-    { "<C-W>gd",          function() vim.cmd(":tab split | lua vim.lsp.buf.definition()") end,                         desc = "Tabedit [D]efiniion" },
-    { "gr",               function() Snacks.picker.lsp_references() end,                                               nowait = true,                           desc = "[G]oto [R]eferences" },
-    -- { "gI",               function() Snacks.picker.lsp_implementations() end,                                          desc = "[G]oto [I]mplementation" },
-    -- { "gy",               function() Snacks.picker.lsp_type_definitions() end,                                         desc = "[G]oto T[y]pe Definition" },
-    { "<leader>ss",       function() Snacks.picker.lsp_symbols() end,                                                  desc = "LSP Symbols" },
-    { "<leader>sS",       function() Snacks.picker.lsp_workspace_symbols() end,                                        desc = "LSP Workspace Symbols" },
+    { "<C-W>gd",          function() vim.cmd(":tab split | lua vim.lsp.buf.definition()") end,                         desc = "Tabedit [D]efinition" },
+    { "grr",              function() Snacks.picker.lsp_references() end,                                               desc = "[R]eferences" },
+    { "gri",              function() Snacks.picker.lsp_implementations() end,                                          desc = "[I]mplementation" },
+    { "grt",              function() Snacks.picker.lsp_type_definitions() end,                                         desc = "[T]ype Definition" },
+    { "grs",              function() Snacks.picker.lsp_workspace_symbols() end,                                        desc = "Workspace [S]ymbols" },
+    { "gO",               function() Snacks.picker.lsp_symbols() end,                                                  desc = "Document Symbols ([O]utline)" },
 
     -- Other
     { "<C-B>",            function() Snacks.bufdelete() end,                                                           desc = "Delete Buffer" },

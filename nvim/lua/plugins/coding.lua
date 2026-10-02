@@ -4,49 +4,14 @@ return {
     'stevearc/conform.nvim',
     event = { "BufWritePre" },
     cmd = { "ConformInfo" },
-    keys = {
-      {
-        -- Customize or remove this keymap to your liking
-        "<localleader>fm",
-        function()
-          require("conform").format({ async = true })
-        end,
-        desc = "[F]or[m]at buffer (Conform)",
-      },
-    },
+    init = function()
+      -- `gq{motion}` formats with conform (LSP fallback); `gw` still does plain text wrapping
+      vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
+    end,
     opts = {
-      -- Set default options
       default_format_opts = {
         lsp_format = "fallback",
       },
-      formatters = {
-        superhtml = {
-          inherit = false,
-          command = 'superhtml',
-          stdin = true,
-          args = { 'fmt', '--stdin-super' },
-        },
-        ziggy = {
-          inherit = false,
-          command = 'ziggy',
-          stdin = true,
-          args = { 'fmt', '--stdin' },
-        },
-        ziggy_schema = {
-          inherit = false,
-          command = 'ziggy',
-          stdin = true,
-          args = { 'fmt', '--stdin-schema' },
-        },
-      },
-
-      formatters_by_ft = {
-        shtml = { 'superhtml' },
-        ziggy = { 'ziggy' },
-        ziggy_schema = { 'ziggy_schema' },
-      },
-      format_on_save = nil,
-      format_after_save = nil,
     }
   },
 
@@ -143,9 +108,7 @@ return {
         end
       end)
 
-      -- Jumplist support (disabled until needed)
-      set({ "v", "n" }, "<c-i>", mc.jumpForward)
-      set({ "v", "n" }, "<c-o>", mc.jumpBackward)
+      -- <c-i>/<c-o> jumplist (synced across cursors) is mapped by the plugin itself
 
       -- Customize how cursors look.
       local hl = vim.api.nvim_set_hl

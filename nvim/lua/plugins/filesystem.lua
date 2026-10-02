@@ -1,4 +1,4 @@
-function rename_file_with_input()
+local function rename_file_with_input()
   vim.ui.input(
     { prompt = "Enter new path for file: " },
     function(new_name)

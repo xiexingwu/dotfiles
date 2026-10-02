@@ -1,51 +1,16 @@
--- vim.api.nvim_create_autocmd({
---   "BufNewFile",
---   "BufRead",
---   "BufEnter",
--- }, {
---   pattern = "*.sh,*.sh.tmpl",
---   callback = function()
---     if vim.fn.search("{{.\\+}}", "nw") ~= 0 then
---       local buf = vim.api.nvim_get_current_buf()
---       vim.api.nvim_set_option_value("filetype", "sh", {buf = buf})
---     end
---   end,
--- })
---
--- vim.api.nvim_create_autocmd({
---   "BufNewFile",
---   "BufRead",
---   "BufEnter",
--- }, {
---   pattern = "*.marko",
---   callback = function()
---     if vim.fn.search("{{.\\+}}", "nw") ~= 0 then
---       local buf = vim.api.nvim_get_current_buf()
---       vim.api.nvim_set_option_value("filetype", "marko", {buf = buf})
---     end
---   end,
--- })
---
--- vim.api.nvim_create_autocmd({
---   "BufNewFile",
---   "BufRead",
---   "BufEnter",
--- }, {
---   pattern = "Brewfile,Brewfile.tmpl",
---   callback = function()
---     if vim.fn.search("{{.\\+}}", "nw") ~= 0 then
---       local buf = vim.api.nvim_get_current_buf()
---       vim.api.nvim_set_option_value("filetype", "ruby", {buf = buf})
---     end
---   end,
--- })
-
 vim.filetype.add({
   extension = {
     marko = 'marko', -- missing Treesitter grammar for marko but there's github linguist: https://github.com/marko-js/marko-tmbundle
   },
   pattern = {
     ['Brewfile.*'] = 'Brewfile',
+    -- dbt: SQL + Jinja inside a dbt project (models, macros, tests, ...)
+    ['.*%.sql'] = {
+      function(path)
+        if vim.fs.root(path, 'dbt_project.yml') then return 'dbt' end
+      end,
+      { priority = 10 },
+    },
   },
 })
 
@@ -62,48 +27,10 @@ vim.filetype.add({
   }
 })
 
-vim.api.nvim_create_autocmd( "FileType" , {
+vim.api.nvim_create_autocmd("FileType", {
+  group = vim.api.nvim_create_augroup('scrollback', {}),
   pattern = 'scrollback',
   callback = function()
     vim.cmd("norm G")
-  end,
-})
-
-vim.api.nvim_create_autocmd('FileType', {
-  group = vim.api.nvim_create_augroup('ziggy', {}),
-  pattern = 'ziggy',
-  callback = function()
-    vim.lsp.start {
-      name = 'Ziggy LSP',
-      cmd = { 'ziggy', 'lsp' },
-      root_dir = vim.loop.cwd(),
-      flags = { exit_timeout = 1000 },
-    }
-  end,
-})
-
-vim.api.nvim_create_autocmd('FileType', {
-  group = vim.api.nvim_create_augroup('ziggy_schema', {}),
-  pattern = 'ziggy_schema',
-  callback = function()
-    vim.lsp.start {
-      name = 'Ziggy LSP',
-      cmd = { 'ziggy', 'lsp', '--schema' },
-      root_dir = vim.loop.cwd(),
-      flags = { exit_timeout = 1000 },
-    }
-  end,
-})
-
-vim.api.nvim_create_autocmd('FileType', {
-  group = vim.api.nvim_create_augroup('superhtml', {}),
-  pattern = 'superhtml',
-  callback = function()
-    vim.lsp.start {
-      name = 'SuperHTML LSP',
-      cmd = { 'superhtml', 'lsp' },
-      root_dir = vim.loop.cwd(),
-      flags = { exit_timeout = 1000 },
-    }
   end,
 })

@@ -3,7 +3,12 @@ vim.opt.relativenumber = false
 vim.opt.title = true
 vim.opt.showmode = false
 
-vim.o.mouse = ""
+-- Mouse on so the terminal sends real scroll events (with mouse off, scroll
+-- arrives as <up>/<down>, which multicursor maps to add cursors). Clicks disabled.
+vim.o.mouse = "a"
+for _, k in ipairs({ "<LeftMouse>", "<2-LeftMouse>", "<LeftDrag>", "<LeftRelease>", "<RightMouse>", "<MiddleMouse>" }) do
+  vim.keymap.set({ "n", "v", "i" }, k, "<Nop>")
+end
 
 vim.g.markdown_recommended_style = 0
 vim.opt.tabstop = 2
@@ -18,12 +23,9 @@ vim.opt.linebreak = true -- for when wrap is turned on manually
 
 vim.opt.swapfile = false
 vim.opt.backup = false
-vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
 vim.opt.undofile = true
 
 vim.opt.ignorecase = true
-vim.opt.hlsearch = true
-vim.opt.incsearch = true
 
 vim.o.winborder = "single"
 
@@ -34,7 +36,7 @@ vim.opt.isfname:append("@-@")
 
 -- fold
 vim.o.foldcolumn = '1' -- '0' is not bad
-vim.o.foldlevel = 99   -- Using ufo provider need a large value, feel free to decrease the value
+vim.o.foldlevel = 99   -- start with folds open
 vim.o.foldlevelstart = 99
 vim.o.foldenable = true
 

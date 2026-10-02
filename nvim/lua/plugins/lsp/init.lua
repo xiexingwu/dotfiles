@@ -1,60 +1,4 @@
-function csharp()
-  vim.lsp.enable('omnisharp')
-  require 'lspconfig'.omnisharp.setup {
-    cmd = { 'dotnet', '/usr/local/bin/omnisharp/OmniSharp.dll' },
-
-    settings = {
-      FormattingOptions = {
-        -- Enables support for reading code style, naming convention and analyzer
-        -- settings from .editorconfig.
-        EnableEditorConfigSupport = true,
-        -- Specifies whether 'using' directives should be grouped and sorted during
-        -- document formatting.
-        OrganizeImports = nil,
-      },
-      MsBuild = {
-        -- If true, MSBuild project system will only load projects for files that
-        -- were opened in the editor. This setting is useful for big C# codebases
-        -- and allows for faster initialization of code navigation features only
-        -- for projects that are relevant to code that is being edited. With this
-        -- setting enabled OmniSharp may load fewer projects and may thus display
-        -- incomplete reference lists for symbols.
-        LoadProjectsOnDemand = nil,
-      },
-      RoslynExtensionsOptions = {
-        -- Enables support for roslyn analyzers, code fixes and rulesets.
-        EnableAnalyzersSupport = nil,
-        -- Enables support for showing unimported types and unimported extension
-        -- methods in completion lists. When committed, the appropriate using
-        -- directive will be added at the top of the current file. This option can
-        -- have a negative impact on initial completion responsiveness,
-        -- particularly for the first few completion sessions after opening a
-        -- solution.
-        EnableImportCompletion = nil,
-        -- Only run analyzers against open files when 'enableRoslynAnalyzers' is
-        -- true
-        AnalyzeOpenDocumentsOnly = nil,
-      },
-      Sdk = {
-        -- Specifies whether to include preview versions of the .NET SDK when
-        -- determining which version to use for project loading.
-        IncludePrereleases = true,
-      },
-    },
-  }
-end
-
-function kotlin()
-  vim.lsp.config('kotlin_lsp', {
-    cmd = { "kotlin-lsp", "--stdio" },
-    single_file_support = true,
-    filetypes = { "kotlin" },
-    root_markers = { "build.gradle", "build.gradle.kts", "pom.xml" },
-  })
-  vim.lsp.enable('kotlin_lsp')
-end
-
-function lua()
+local function lua()
   vim.lsp.config('lua_ls', {
     on_init = function(client)
       if client.workspace_folders then
@@ -106,28 +50,7 @@ function lua()
   vim.lsp.enable('lua_ls')
 end
 
-function python()
-  vim.lsp.enable('basedpyright')
-end
-
-function rust()
-  -- vim.lsp.config('rust_analyzer', {
-  --   settings = {
-  --     ['rust-analyzer'] = {
-  --       diagnostics = {
-  --         enable = false,
-  --       }
-  --     }
-  --   }
-  -- })
-  vim.lsp.enable('rust_analyzer')
-end
-
-function swift()
-  vim.lsp.enable('sourcekit')
-end
-
-function ts()
+local function ts()
   -- TypeScript 7 (brew `typescript`) dropped tsserver, which ts_ls needs; use its native LSP instead
   vim.lsp.config('tsgo', {
     cmd = { 'tsc', '--lsp', '--stdio' },
@@ -135,14 +58,14 @@ function ts()
   vim.lsp.enable('tsgo')
 end
 
-function zig()
+local function zig()
   vim.lsp.config('zls', {
-    cmd = { '/Users/xiexingwu/.zvm/bin/zls' },
+    cmd = { vim.env.HOME .. '/.zvm/bin/zls' },
     filetypes = { 'zig' },
     root_markers = { 'build.zig' },
     settings = {
       zls = {
-        zig_exe_path = '/Users/xiexingwu/.zvm/bin/zig',
+        zig_exe_path = vim.env.HOME .. '/.zvm/bin/zig',
       },
     },
   })
@@ -152,24 +75,18 @@ end
 return {
   'neovim/nvim-lspconfig',
   config = function()
-    -- local lspconfig = require('lspconfig')
+    -- brew's binary is `kotlin-lsp`; lspconfig defaults to `intellij-server`
+    vim.lsp.config('kotlin_lsp', { cmd = { 'kotlin-lsp', '--stdio' } })
 
-    vim.lsp.enable('bashls')
-    -- Csharp
-    -- csharp()
-
-    kotlin()
+    vim.lsp.enable({
+      'bashls',
+      'basedpyright',
+      'kotlin_lsp',
+      'marko-js',
+      'rust_analyzer',
+      'sourcekit',
+    })
     lua()
-
-    -- -- Markdown
-    -- vim.lsp.enable('marksman')
-
-    -- Marko
-    vim.lsp.enable('marko-js')
-
-    python()
-    rust()
-    swift()
     ts()
     zig()
   end

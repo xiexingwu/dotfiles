@@ -27,7 +27,7 @@ vim.keymap.set("n", "<Tab>", "gt", { desc = "Next Tab" })
 vim.keymap.set("n", "<S-Tab>", "gT", { desc = "Alternate Tab" })
 vim.keymap.set("n", "<C-W>\\", "<C-W>^", { desc = "Split [Alternate]" })
 vim.keymap.set("n", "<C-W>gt", "<C-W>T", { desc = "Split -> [T]ab" })
-vim.keymap.del("n", "<C-W><C-D>");
+pcall(vim.keymap.del, "n", "<C-W><C-D>") -- pcall: already gone when config is reloaded
 
 -- Terminal
 vim.keymap.set("t", "<C-\\><C-\\>", "<C-\\><C-N>", { desc = "Terminal Escape" })
@@ -42,19 +42,22 @@ vim.keymap.set("n", "<leader>;", "q:", { desc = "Cmdline window" })
 vim.keymap.set("n", "q:", "<nop>")
 vim.keymap.set("n", "\\", "<C-^>", { desc = "Alternate file" })
 vim.keymap.set('n', 'g%', "<nop>")
-vim.keymap.set('n', 'g%', "<nop>")
 vim.keymap.set('n', '<C-F>', "<nop>")
 
 vim.keymap.set("n", "<leader>tw", "<cmd>set wrap!<CR>", { desc = "[T]oggle [W]rap" })
 
--- reload init.lua
-vim.keymap.set("n", "<leader>R", "<cmd>source" .. vim.api.nvim_eval("$MYVIMRC") .. "<CR>", { desc = "[R]eload config" })
+-- Reload lua/config/* (lazy.nvim can't re-run setup; use `:Lazy reload <plugin>` for plugin specs)
+vim.keymap.set("n", "<leader>R", function()
+  for _, mod in ipairs({ "config.set", "config.keys", "config.filetype" }) do
+    package.loaded[mod] = nil
+    require(mod)
+  end
+  vim.notify("Reloaded config.{set,keys,filetype}")
+end, { desc = "[R]eload config" })
 
--- LSP See Snacks.picker for picker-related LSP functions
-vim.keymap.set('n', 'gO', '<nop>')
-vim.keymap.set('n', '<space>ld', vim.diagnostic.open_float, { desc = "LSP [D]iagnostic (Popup)" })
+-- LSP: `gr` prefix (built-in grn rename, gra action; pickers for the rest in snacks/init.lua),
+-- `gq` format (conform formatexpr, coding.lua), ]d [d <C-W>d diagnostics (built-in)
 vim.keymap.set("n", "<space>ll", vim.diagnostic.setloclist, { desc = "LSP diagnostic [L]oclist" })
-vim.keymap.set("n", "<leader>lr", vim.lsp.buf.rename, { desc = "LSP [R]ename" })
 
 -- term/multiplexer integration
 local nav = {
